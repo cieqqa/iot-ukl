@@ -10,6 +10,19 @@ export type SensorSample = SensorValues & {
   ts: number;
 };
 
+export type MaturityLabel =
+  | "Belum Matang"
+  | "Hampir Matang"
+  | "Matang"
+  | "Overfermentasi / Busuk";
+
+export type TapeModelResult = {
+  label: MaturityLabel;
+  confidence: number;
+  recommendation: string;
+  sampleCount: number;
+};
+
 export type ConnectionStatus = "connecting" | "online" | "demo" | "offline";
 
 export type EventLog = {

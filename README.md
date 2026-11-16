@@ -39,6 +39,21 @@ npm run build
 npm run start -- -H 0.0.0.0
 ```
 
+## Prediksi AI kematangan tape
+
+Dashboard memakai klasifikasi K-nearest neighbors (KNN) dari
+`dataset_kematangan_tape_1000.csv`. Model mencocokkan suhu, kelembapan, dan gas
+alkohol dengan data berlabel untuk menampilkan tahap kematangan dan rekomendasi
+tindakan. Berkas dataset disertakan pada route `/api/predict` saat build.
+
+Dataset tidak mencatat durasi hingga matang dan berisi fitur pH serta MQ-135
+yang tidak tersedia dari sensor website. Karena itu, estimasi waktu bukan hasil
+pelatihan model: aplikasi menggabungkan tahap KNN dengan target awal 72 jam.
+Nilai gas sensor ESP32 adalah ADC, sedangkan dataset menyebut ppm; aplikasi
+memetakan rentang ADC secara perkiraan, bukan mengklaim konversi terkalibrasi.
+Kalibrasikan sensor dan validasi hasil terhadap batch nyata sebelum menjadikan
+prediksi sebagai acuan produksi. Rekomendasi AI bukan jaminan keamanan pangan.
+
 ## Menguji API
 
 Sesudah `.env.local` diisi dan server berjalan, uji route POST dari PowerShell.

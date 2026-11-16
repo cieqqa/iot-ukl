@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import AiAdvisor from "@/components/AiAdvisor";
 import Hero from "@/components/Hero";
 import History from "@/components/History";
 import Navbar from "@/components/Navbar";
@@ -14,9 +15,11 @@ import { predict } from "@/lib/predict";
 import type {
   ConnectionStatus,
   EventLog,
+  MaturityLabel,
   SensorKey,
   SensorRow,
   SensorSample,
+  TapeModelResult,
 } from "@/lib/types";
 
 const GAS_RIPE_DEFAULT = 2_000;
@@ -75,6 +78,41 @@ function asSamples(rows: SensorRow[]): SensorSample[] {
   }));
 }
 
+function parseTapeModelResult(value: unknown): TapeModelResult {
+  if (typeof value !== "object" || value === null) {
+    throw new Error("Format hasil prediksi AI tidak valid.");
+  }
+
+  const result = value as Record<string, unknown>;
+  const labels: MaturityLabel[] = [
+    "Belum Matang",
+    "Hampir Matang",
+    "Matang",
+    "Overfermentasi / Busuk",
+  ];
+  if (
+    typeof result.label !== "string" ||
+    !labels.includes(result.label as MaturityLabel) ||
+    typeof result.confidence !== "number" ||
+    !Number.isFinite(result.confidence) ||
+    result.confidence < 0 ||
+    result.confidence > 1 ||
+    typeof result.recommendation !== "string" ||
+    typeof result.sampleCount !== "number" ||
+    !Number.isInteger(result.sampleCount) ||
+    result.sampleCount < 1
+  ) {
+    throw new Error("Hasil prediksi AI berisi data yang tidak valid.");
+  }
+
+  return {
+    label: result.label as MaturityLabel,
+    confidence: result.confidence,
+    recommendation: result.recommendation,
+    sampleCount: result.sampleCount,
+  };
+}
+
 function readStoredBatchStart(): number | null {
   const value = localStorage.getItem(BATCH_STORAGE_KEY);
   if (value === null) return null;
@@ -100,11 +138,18 @@ export default function Dashboard() {
     GAS_OVERRIPE_DEFAULT,
   );
   const [now, setNow] = useState<number | null>(null);
+  const [classifiedReading, setClassifiedReading] = useState<{
+    ts: number;
+    result: TapeModelResult;
+  } | null>(null);
+  const [modelError, setModelError] = useState<string | null>(null);
+  const [modelLoading, setModelLoading] = useState(false);
   const [events, setEvents] = useState<EventLog[]>([]);
   const eventId = useRef(0);
   const previousStage = useRef<number | null>(null);
   const previousOverripe = useRef(false);
   const storageWarningShown = useRef(false);
+  const latest = readings.at(-1) ?? null;
 
   const addLog = useCallback(
     (text: string, tone?: EventLog["tone"]) => {
@@ -279,6 +324,61 @@ export default function Dashboard() {
   }, [demo, mounted]);
 
   useEffect(() => {
+    if (!latest) {
+      setModelLoading(false);
+      setModelError(null);
+      return;
+    }
+
+    const controller = new AbortController();
+    const reading = latest;
+    setModelLoading(true);
+    setModelError(null);
+
+    void (async () => {
+      try {
+        const response = await fetch("/api/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            temp: reading.temp,
+            hum: reading.hum,
+            gas: reading.gas,
+          }),
+          signal: controller.signal,
+        });
+        const body: unknown = await response.json();
+
+        if (!response.ok) {
+          const message =
+            typeof body === "object" &&
+            body !== null &&
+            "error" in body &&
+            typeof body.error === "string"
+              ? body.error
+              : `Server prediksi merespons dengan status ${response.status}.`;
+          throw new Error(message);
+        }
+
+        setClassifiedReading({
+          ts: reading.ts,
+          result: parseTapeModelResult(body),
+        });
+      } catch (error) {
+        if (controller.signal.aborted) return;
+        const message =
+          error instanceof Error ? error.message : "Prediksi AI gagal.";
+        console.error("Gagal meminta prediksi kematangan tape:", message);
+        setModelError(message);
+      } finally {
+        if (!controller.signal.aborted) setModelLoading(false);
+      }
+    })();
+
+    return () => controller.abort();
+  }, [latest?.gas, latest?.hum, latest?.temp, latest?.ts]);
+
+  useEffect(() => {
     if (!mounted) return;
     try {
       localStorage.setItem(
@@ -297,7 +397,10 @@ export default function Dashboard() {
     }
   }, [addLog, mounted, overripeThreshold, ripeThreshold]);
 
-  const latest = readings.at(-1) ?? null;
+  const currentModel =
+    latest && classifiedReading?.ts === latest.ts
+      ? classifiedReading.result
+      : null;
   const prediction = useMemo(() => {
     if (!latest) return null;
     return predict({
@@ -308,7 +411,14 @@ export default function Dashboard() {
       gasRipeThreshold: ripeThreshold,
       gasOverripeThreshold: overripeThreshold,
     });
-  }, [batchStart, latest, now, overripeThreshold, readings, ripeThreshold]);
+  }, [
+    batchStart,
+    latest,
+    now,
+    overripeThreshold,
+    readings,
+    ripeThreshold,
+  ]);
 
   useEffect(() => {
     if (!prediction) return;
@@ -402,6 +512,11 @@ export default function Dashboard() {
         demo={demo}
         onToggleDemo={toggleDemo}
         onStartBatch={startNewBatch}
+      />
+      <AiAdvisor
+        result={currentModel}
+        error={modelError}
+        loading={modelLoading}
       />
       <History
         readings={readings}

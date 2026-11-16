@@ -117,6 +117,12 @@ section.sec{padding:44px 10px 6px}
 .notes{margin:16px 0 0;padding:0;list-style:none;font-size:13px;color:var(--muted)}
 .notes li{padding:3px 0}
 .model{margin-top:14px;font-size:12px;color:var(--muted);background:#fff;border-radius:14px;padding:10px 14px}
+.model.error{color:#8f1d22;background:#ffe5e5}
+.ai-advisor{background:var(--soft);border-radius:var(--r);padding:18px}
+.ai-advisor>p:first-child{margin-top:0}
+.recommendation{margin-top:14px;background:#fff;border-left:4px solid var(--blue);border-radius:14px;padding:12px 14px}
+.recommendation strong{font-size:13px}
+.recommendation p{margin:4px 0 0;font-size:13px;color:var(--muted)}
 
 /* chart + log */
 .card{background:var(--soft);border-radius:var(--r);padding:18px}
