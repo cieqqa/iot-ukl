@@ -1,8 +1,10 @@
 # Peram
 
-Peram adalah pemantau fermentasi tape berbasis Next.js 15, TypeScript, dan
-Supabase. ESP32 mengirim data ke API lokal Next.js melalui HTTP; hanya Next.js
-yang mengakses Supabase menggunakan HTTPS.
+Peram adalah pemantau fermentasi tape berbasis Next.js 15, TypeScript, KNN, dan
+Supabase. ESP32 mengirim pembacaan sensor melalui HTTPS/HTTP ke aplikasi
+Next.js; Next.js menyimpan data ke Supabase dan menghasilkan prediksi dari
+dataset tape. Dashboard dapat dihosting publik dan digunakan oleh banyak
+perangkat/browser.
 
 ## Persiapan Supabase
 
@@ -15,10 +17,15 @@ yang mengakses Supabase menggunakan HTTPS.
    ```env
    SUPABASE_URL=https://project-id.supabase.co
    SUPABASE_SERVICE_ROLE_KEY=service-role-key
+   IOT_API_KEY=kunci-acak-unik-untuk-esp32
    ```
 
    Kunci service role adalah rahasia. Jangan memakai awalan `NEXT_PUBLIC_`,
    menaruh kunci di `main.py`, atau membagikan/commit berkas `.env.local`.
+
+   `IOT_API_KEY` bersifat opsional saat pengembangan. Saat diisi, endpoint
+   `POST /api/sensor` hanya menerima perangkat yang mengirim header
+   `x-api-key` atau `Authorization: Bearer <IOT_API_KEY>`.
 
 ## Menjalankan di laptop
 
@@ -53,6 +60,69 @@ Nilai gas sensor ESP32 adalah ADC, sedangkan dataset menyebut ppm; aplikasi
 memetakan rentang ADC secara perkiraan, bukan mengklaim konversi terkalibrasi.
 Kalibrasikan sensor dan validasi hasil terhadap batch nyata sebelum menjadikan
 prediksi sebagai acuan produksi. Rekomendasi AI bukan jaminan keamanan pangan.
+
+Alur model saat ini:
+
+1. ESP32 mengirim suhu, kelembapan udara, gas alkohol, dan kelembapan tape.
+2. API menyimpan pembacaan baru ke tabel `sensor_readings` di Supabase.
+3. Dashboard mengambil pembacaan terbaru dari database.
+4. API `/api/predict` membandingkannya dengan 1.000 sampel berlabel pada
+   `dataset_kematangan_tape_1000.csv` menggunakan KNN.
+5. Hasil prediksi kembali ditampilkan pada dashboard sebagai tahap, kecocokan,
+   dan saran.
+
+Dataset saat ini berfungsi sebagai baseline pelatihan/model awal. Data sensor
+baru yang masuk belum otomatis menjadi contoh berlabel atau melatih ulang
+model. Agar model dapat ditingkatkan, batch harus diberi label kematangan
+benar-benar matang melalui proses validasi manual, lalu sampel baru perlu
+digabungkan ke dataset dan model di-deploy ulang. Jangan membuat label hanya
+dari output prediksi model itu sendiri.
+
+## Deploy agar dapat diakses publik
+
+### 1. Deploy database
+
+Supabase sudah menyimpan data di cloud. Jalankan `supabase.sql` pada SQL Editor
+proyek Supabase setelah membuat proyek. Skema membuat `sensor_readings` untuk
+data IoT dan `prediction_logs` untuk riwayat prediksi bila ingin menambah
+pencatatan tersebut pada integrasi aplikasi.
+
+### 2. Deploy aplikasi
+
+Opsi termudah adalah Vercel dari dashboard Vercel:
+
+1. Push repository ke GitHub/GitLab.
+2. Import repository pada Vercel.
+3. Pilih framework Next.js dan pertahankan build command bawaan.
+4. Tambahkan variabel environment pada Vercel:
+   - `SUPABASE_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `IOT_API_KEY`
+5. Deploy, lalu catat URL publik seperti `https://peram.vercel.app`.
+
+Karena deploy Next.js serverless membutuhkan dataset pada bundle, route
+`/api/predict` sudah dikonfigurasi agar `dataset_kematangan_tape_1000.csv`
+diikutsertakan pada build melalui `next.config.ts`.
+
+### 3. Arahkan ESP32 ke deployment
+
+Ganti `API_URL` pada ESP32 menjadi URL publik:
+
+```python
+API_URL = "https://peram.vercel.app/api/sensor"
+```
+
+Tambahkan header API key pada request ESP32:
+
+```python
+headers = {"Content-Type": "application/json", "x-api-key": IOT_API_KEY}
+```
+
+Gunakan `IOT_API_KEY` yang sama dengan nilai environment pada Vercel. Jangan
+menaruh service role key Supabase pada firmware ESP32 atau berkas browser.
+
+Di produksi, server Next.js sebaiknya menggunakan HTTPS, dan ESP32 perlu
+menyertakan sertifikat/waktu yang benar untuk validasi TLS.
 
 ## Menguji API
 
@@ -133,6 +203,3 @@ dan alat:
 - Nomor pin sensor serta `SOIL_DRY` dan `SOIL_WET` berasal dari konfigurasi
   ESP32 (`config.py`/rangkaian). Sesuaikan berdasarkan pin yang benar dan
   pengukuran sensor kering/basah milik Anda; `main.py` tidak diubah.
-
-Prediksi yang tampil saat ini masih memakai aturan sederhana waktu dan kadar
-gas, bukan AI.

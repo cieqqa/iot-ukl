@@ -64,6 +64,19 @@ function errorMessage(error: unknown): string {
 }
 
 export async function POST(request: Request) {
+  const configuredApiKey = process.env.IOT_API_KEY;
+  if (configuredApiKey) {
+    const suppliedApiKey =
+      request.headers.get("x-api-key") ??
+      request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
+    if (suppliedApiKey !== configuredApiKey) {
+      return NextResponse.json(
+        { success: false, error: "API key perangkat tidak valid." },
+        { status: 401 },
+      );
+    }
+  }
+
   let payload: unknown;
 
   try {

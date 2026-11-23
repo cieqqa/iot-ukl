@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 import type { MaturityLabel } from "@/lib/types";
 
@@ -182,12 +183,38 @@ export async function POST(request: Request) {
       (left, right) => right[1] - left[1],
     )[0];
 
-    return NextResponse.json({
+    const prediction = {
       label,
       confidence: winningWeight / totalWeight,
       recommendation: getRecommendation(label, input.temp),
       sampleCount: samples.length,
-    });
+    };
+
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (supabaseUrl && serviceRoleKey) {
+      try {
+        const supabase = createClient(supabaseUrl, serviceRoleKey);
+        const { error } = await supabase.from("prediction_logs").insert({
+          temp: input.temp,
+          hum: input.hum,
+          gas: input.gas,
+          label: prediction.label,
+          confidence: prediction.confidence,
+          recommendation: prediction.recommendation,
+          sample_count: prediction.sampleCount,
+        });
+        if (error) {
+          console.error("Gagal menyimpan riwayat prediksi:", error.message);
+        }
+      } catch (error) {
+        const message =
+          error instanceof Error ? error.message : "Konfigurasi Supabase tidak valid.";
+        console.error("Gagal menyimpan riwayat prediksi:", message);
+      }
+    }
+
+    return NextResponse.json(prediction);
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Gagal memuat model dataset.";

@@ -121,9 +121,10 @@ export default function Prediction({
             {prediction?.notes.map((note) => <li key={note}>{note}</li>)}
           </ul>
           <div className="model">
-            ⚙️ Prediksi saat ini memakai aturan sederhana, bukan AI (waktu
-            berjalan + kadar gas alkohol). Nanti fungsi prediksi dapat
-            diganti dengan model AI melalui <code>api/predict</code>.
+            Estimasi durasi memakai aturan waktu fermentasi, sementara tahap
+            kematangannya diklasifikasikan oleh model KNN melalui{" "}
+            <code>/api/predict</code>. Kedua hasil ditampilkan sebagai
+            perkiraan tambahan dan perlu divalidasi dengan pengamatan batch.
           </div>
         </div>
       </div>
