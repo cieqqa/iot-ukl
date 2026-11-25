@@ -1,11 +1,12 @@
 import { CONFIG, STAGES } from "@/lib/config";
 import { formatDate, formatDuration } from "@/lib/format";
-import type { PredictionResult } from "@/lib/types";
+import type { PredictionModelInfo, PredictionResult } from "@/lib/types";
 
 type PredictionProps = {
   prediction: PredictionResult | null;
   mounted: boolean;
   demo: boolean;
+  modelInfo: PredictionModelInfo;
   onToggleDemo: () => void;
   onStartBatch: () => void;
 };
@@ -14,6 +15,7 @@ export default function Prediction({
   prediction,
   mounted,
   demo,
+  modelInfo,
   onToggleDemo,
   onStartBatch,
 }: PredictionProps) {
@@ -121,9 +123,27 @@ export default function Prediction({
             {prediction?.notes.map((note) => <li key={note}>{note}</li>)}
           </ul>
           <div className="model">
-            ⚙️ Prediksi saat ini memakai aturan sederhana, bukan AI (waktu
-            berjalan + kadar gas alkohol). Nanti fungsi prediksi dapat
-            diganti dengan model AI melalui <code>api/predict</code>.
+            {modelInfo.status === "ready" ? (
+              <>
+                Klasifikasi tahap memakai KNN dari {modelInfo.trainingSampleCount}{" "}
+                data latih (dari {modelInfo.sampleCount} baris dataset), dengan
+                akurasi uji {(modelInfo.accuracy * 100).toFixed(1)}% pada{" "}
+                {modelInfo.testSampleCount} baris. Galat rata-rata waktu tidak
+                dapat dihitung karena dataset tidak mencatat durasi; estimasi
+                jam masih memakai aturan awal {CONFIG.targetHours} jam, bukan
+                hasil model. Slider gas hanya berlaku untuk fallback lama.
+              </>
+            ) : modelInfo.status === "fallback" ? (
+              <>
+                {modelInfo.message} Prediksi memakai aturan sederhana lama
+                (waktu berjalan + kadar gas alkohol).
+              </>
+            ) : (
+              <>
+                Model dataset sedang dimuat; sementara prediksi memakai aturan
+                sederhana lama (waktu berjalan + kadar gas alkohol).
+              </>
+            )}
           </div>
         </div>
       </div>

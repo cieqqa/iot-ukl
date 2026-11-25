@@ -5,8 +5,13 @@ export const CONFIG = {
   maxPoints: 90,
   gasMax: 4_095,
   staleSeconds: 40,
+  // Dataset contains no elapsed-time labels; retained only for the legacy ETA.
   targetHours: 72,
-  idealTemperature: [28, 32] as const,
+  // Min/max temperature among rows labeled "Matang" in the source dataset.
+  idealTemperature: [28.04, 31.98] as const,
+  // Legacy fallback defaults only; dataset gas is ppm, not ESP32 ADC.
+  gasRipeDefault: 2_000,
+  gasOverripeDefault: 3_200,
   demoStepMinutes: 10,
 };
 

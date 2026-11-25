@@ -28,7 +28,7 @@ export default function AiAdvisor({ result, error, loading }: AiAdvisorProps) {
                 <b>{result.label}</b>
               </div>
               <div className="fact">
-                <small>Kecocokan tetangga</small>
+                <small>Kesepakatan tetangga</small>
                 <b>{Math.round(result.confidence * 100)}%</b>
               </div>
               <div className="fact">
@@ -41,12 +41,11 @@ export default function AiAdvisor({ result, error, loading }: AiAdvisorProps) {
               <p>{result.recommendation}</p>
             </div>
             <p className="model">
-              AI adalah tambahan dan tidak mengubah prediksi matang di atas.
-              Model memakai suhu, kelembapan, dan gas alkohol. Dataset tidak
-              berisi waktu matang; estimasi waktu tetap memakai aturan lama.
-              Gas ADC dipetakan secara perkiraan ke rentang dataset, jadi
-              kalibrasikan sensor dan validasi hasil dengan batch nyata.
-              Prediksi ini bukan jaminan keamanan pangan.
+              Kesepakatan tetangga bukan probabilitas terkalibrasi. Model hanya
+              memakai suhu dan kelembapan; gas, soil, pH, dan MQ-135 tidak
+              dipakai. Dataset tidak berisi durasi atau batch, jadi akurasi uji
+              belum menunjukkan kinerja pada batch baru dan tidak menjamin
+              keamanan pangan.
             </p>
           </>
         )}

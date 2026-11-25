@@ -1,4 +1,4 @@
-import { SENSORS } from "@/lib/config";
+import { CONFIG, SENSORS } from "@/lib/config";
 import type { SensorKey, SensorSample } from "@/lib/types";
 
 type SensorCardsProps = {
@@ -11,9 +11,13 @@ function sensorStatus(
   value: number,
 ): { label: string; tone: string } {
   if (key === "temp") {
-    if (value < 28) return { label: "#terlalu dingin", tone: "warn" };
-    if (value > 32) return { label: "#terlalu panas", tone: "bad" };
-    return { label: "#ideal", tone: "ok" };
+    if (value < CONFIG.idealTemperature[0]) {
+      return { label: "#di bawah rentang data", tone: "warn" };
+    }
+    if (value > CONFIG.idealTemperature[1]) {
+      return { label: "#di atas rentang data", tone: "bad" };
+    }
+    return { label: "#rentang Matang", tone: "ok" };
   }
 
   if (key === "hum") {

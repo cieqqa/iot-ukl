@@ -30,7 +30,8 @@ npm run dev -- -H 0.0.0.0
 ```
 
 Buka dashboard di `http://localhost:3000`. Untuk melihat data contoh tanpa
-memanggil API sensor, buka `http://localhost:3000/?demo`.
+memanggil API sensor, buka `http://localhost:3000/?demo` atau
+`http://localhost:3000/peram?demo`.
 
 Untuk menjalankan build produksi secara lokal:
 
@@ -39,20 +40,53 @@ npm run build
 npm run start -- -H 0.0.0.0
 ```
 
-## Prediksi AI kematangan tape
+## Model kematangan berbasis dataset
 
-Dashboard memakai klasifikasi K-nearest neighbors (KNN) dari
-`dataset_kematangan_tape_1000.csv`. Model mencocokkan suhu, kelembapan, dan gas
-alkohol dengan data berlabel untuk menampilkan tahap kematangan dan rekomendasi
-tindakan. Berkas dataset disertakan pada route `/api/predict` saat build.
+Dashboard memakai K-nearest neighbors (KNN) ringan yang dijalankan di
+TypeScript. Model hanya memakai suhu dan kelembapan karena keduanya tersedia
+dengan unit yang sama di dataset dan ESP32. Nilai gas dari dataset adalah ppm,
+sedangkan ESP32 mengirim ADC mentah; gas, soil, pH, dan MQ-135 karena itu tidak
+dipakai untuk model ini.
 
-Dataset tidak mencatat durasi hingga matang dan berisi fitur pH serta MQ-135
-yang tidak tersedia dari sensor website. Karena itu, estimasi waktu bukan hasil
-pelatihan model: aplikasi menggabungkan tahap KNN dengan target awal 72 jam.
-Nilai gas sensor ESP32 adalah ADC, sedangkan dataset menyebut ppm; aplikasi
-memetakan rentang ADC secara perkiraan, bukan mengklaim konversi terkalibrasi.
-Kalibrasikan sensor dan validasi hasil terhadap batch nyata sebelum menjadikan
-prediksi sebagai acuan produksi. Rekomendasi AI bukan jaminan keamanan pangan.
+Dataset tidak mencatat waktu mulai, waktu matang, durasi, soil, atau batch.
+Model hanya mengklasifikasikan label kematangan; MAE waktu tidak dapat dihitung.
+Estimasi waktu 72 jam yang masih tampil adalah aturan awal lama, bukan hasil
+pelatihan. Dataset juga belum dapat menunjukkan akurasi pada batch baru, jadi
+hasilnya bukan jaminan keamanan pangan.
+
+### Melatih ulang model
+
+Dataset sumber yang disertakan berada di root sebagai
+`dataset_kematangan_tape_1000.csv`. Dari PowerShell, jalankan:
+
+```powershell
+cd C:\xampp\htdocs\iot-ukl
+node scripts\latih-model.mjs
+npx tsc --noEmit
+npm run build
+```
+
+Script melakukan split stratified 80/20 per label (tidak ada kolom batch untuk
+split per batch), mencetak akurasi status dan contoh uji, lalu menulis
+parameter, normalisasi, evaluasi, dan sampel latih ke
+`lib/model-kematangan.json`. Tidak ada dependensi baru. Jika model hilang atau
+formatnya tidak valid, aplikasi kembali ke aturan lama dan menandainya di
+dashboard.
+
+### Menyiapkan impor dataset ke Supabase
+
+`supabase.sql` menyiapkan tabel `dataset_kematangan` dengan RLS aktif dan tanpa
+policy. Setelah tabel dibuat di SQL Editor dan `.env.local` diisi, impor dapat
+dijalankan manual dari PowerShell:
+
+```powershell
+cd C:\xampp\htdocs\iot-ukl
+node scripts\impor-dataset.mjs
+```
+
+Script memakai `SUPABASE_URL` dan `SUPABASE_SERVICE_ROLE_KEY` dari `.env.local`
+serta upsert berdasarkan `source_no`. Jangan commit atau membagikan berkas
+secret tersebut.
 
 ## Menguji API
 
@@ -126,13 +160,16 @@ Field dari ESP32 disimpan sebagai berikut: `temperature` → `temp`,
 Beberapa nilai adalah perkiraan awal, bukan hasil kalibrasi untuk semua bahan
 dan alat:
 
-- Durasi target fermentasi `72 jam` dan kisaran suhu ideal `28–32 °C` ada di
-  `lib/config.ts`.
-- Batas gas matang `2000` dan lewat matang `3200` adalah nilai awal; ubah melalui
-  slider di dashboard. Nilai tersimpan di browser.
+- Durasi target `72 jam` hanya aturan awal lama; dataset tidak memiliki label
+  waktu untuk melatih estimasi tersebut.
+- Rentang suhu dashboard `28.04–31.98 °C` adalah min/maks baris berlabel
+  `Matang` dalam dataset, bukan rekomendasi keamanan pangan.
+- Batas gas matang `2000` dan lewat matang `3200` hanya untuk fallback lama;
+  ubah melalui slider bila diperlukan. Dataset gas dalam ppm tidak setara
+  dengan ADC ESP32.
 - Nomor pin sensor serta `SOIL_DRY` dan `SOIL_WET` berasal dari konfigurasi
   ESP32 (`config.py`/rangkaian). Sesuaikan berdasarkan pin yang benar dan
   pengukuran sensor kering/basah milik Anda; `main.py` tidak diubah.
 
-Prediksi yang tampil saat ini masih memakai aturan sederhana waktu dan kadar
-gas, bukan AI.
+Saat model tersedia, tahap kematangan dihitung dari dataset suhu/kelembapan.
+Jika model tidak tersedia, prediksi kembali ke aturan sederhana waktu dan gas.

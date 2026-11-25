@@ -11,7 +11,7 @@ import Stages from "@/components/Stages";
 import { CONFIG } from "@/lib/config";
 import { createDemoHistory, createDemoReading } from "@/lib/demo";
 import { formatDuration } from "@/lib/format";
-import { predict } from "@/lib/predict";
+import { activateDatasetModel, predict } from "@/lib/predict";
 import type {
   ConnectionStatus,
   EventLog,
@@ -20,10 +20,9 @@ import type {
   SensorRow,
   SensorSample,
   TapeModelResult,
+  PredictionModelInfo,
 } from "@/lib/types";
 
-const GAS_RIPE_DEFAULT = 2_000;
-const GAS_OVERRIPE_DEFAULT = 3_200;
 const BATCH_STORAGE_KEY = "peram-start";
 const THRESHOLD_STORAGE_KEY = "peram-th";
 const HOUR_MS = 3_600_000;
@@ -133,10 +132,12 @@ export default function Dashboard() {
   const [connectionText, setConnectionText] = useState("Menghubungkan…");
   const [series, setSeries] = useState<SensorKey>("gas");
   const [batchStart, setBatchStart] = useState<number | null>(null);
-  const [ripeThreshold, setRipeThreshold] = useState(GAS_RIPE_DEFAULT);
+  const [ripeThreshold, setRipeThreshold] = useState(CONFIG.gasRipeDefault);
   const [overripeThreshold, setOverripeThreshold] = useState(
-    GAS_OVERRIPE_DEFAULT,
+    CONFIG.gasOverripeDefault,
   );
+  const [predictionModel, setPredictionModel] =
+    useState<PredictionModelInfo>({ status: "loading" });
   const [now, setNow] = useState<number | null>(null);
   const [classifiedReading, setClassifiedReading] = useState<{
     ts: number;
@@ -165,6 +166,39 @@ export default function Dashboard() {
     },
     [now],
   );
+
+  useEffect(() => {
+    let active = true;
+
+    void (async () => {
+      try {
+        const response = await fetch("/api/predict", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`Server model merespons dengan status ${response.status}.`);
+        }
+
+        const status = activateDatasetModel(await response.json());
+        if (!status) {
+          throw new Error("Berkas model kematangan tidak valid.");
+        }
+        if (active) setPredictionModel(status);
+      } catch (error) {
+        if (!active) return;
+        const message =
+          error instanceof Error ? error.message : "Model kematangan gagal dimuat.";
+        console.error("Gagal memuat model kematangan:", message);
+        activateDatasetModel(null);
+        setPredictionModel({
+          status: "fallback",
+          message: "Model dataset tidak tersedia atau tidak valid.",
+        });
+      }
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -343,7 +377,6 @@ export default function Dashboard() {
           body: JSON.stringify({
             temp: reading.temp,
             hum: reading.hum,
-            gas: reading.gas,
           }),
           signal: controller.signal,
         });
@@ -376,7 +409,7 @@ export default function Dashboard() {
     })();
 
     return () => controller.abort();
-  }, [latest?.gas, latest?.hum, latest?.temp, latest?.ts]);
+  }, [latest?.hum, latest?.temp, latest?.ts]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -416,6 +449,7 @@ export default function Dashboard() {
     latest,
     now,
     overripeThreshold,
+    predictionModel,
     readings,
     ripeThreshold,
   ]);
@@ -434,11 +468,16 @@ export default function Dashboard() {
 
     if (prediction.overripe !== previousOverripe.current) {
       if (prediction.overripe) {
-        addLog("Gas sangat tinggi, tape mulai lewat matang", "bad");
+        addLog(
+          predictionModel.status === "ready"
+            ? "Model dataset mengklasifikasikan tape lewat matang"
+            : "Gas sangat tinggi, tape mulai lewat matang",
+          "bad",
+        );
       }
       previousOverripe.current = prediction.overripe;
     }
-  }, [addLog, prediction]);
+  }, [addLog, prediction, predictionModel.status]);
 
   function startNewBatch() {
     if (!window.confirm("Mulai batch tape baru sekarang? Hitungan waktu akan diulang dari nol.")) {
@@ -510,6 +549,7 @@ export default function Dashboard() {
         prediction={prediction}
         mounted={mounted}
         demo={demo}
+        modelInfo={predictionModel}
         onToggleDemo={toggleDemo}
         onStartBatch={startNewBatch}
       />

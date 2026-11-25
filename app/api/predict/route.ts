@@ -1,15 +1,18 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { NextResponse } from "next/server";
+import { CONFIG } from "@/lib/config";
+import {
+  classifyWithDatasetModel,
+  parseDatasetModel,
+  type DatasetMaturityModel,
+} from "@/lib/predict";
 import type { MaturityLabel } from "@/lib/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type TrainingSample = {
-  features: [number, number, number];
-  label: MaturityLabel;
-};
+let datasetModelPromise: Promise<DatasetMaturityModel> | undefined;
 
 const LABELS: readonly MaturityLabel[] = [
   "Belum Matang",
@@ -17,87 +20,34 @@ const LABELS: readonly MaturityLabel[] = [
   "Matang",
   "Overfermentasi / Busuk",
 ];
-const K_NEIGHBORS = 11;
-let trainingDataPromise: Promise<TrainingSample[]> | undefined;
 
-function isMaturityLabel(value: string): value is MaturityLabel {
-  return LABELS.includes(value as MaturityLabel);
-}
-
-async function loadTrainingData(): Promise<TrainingSample[]> {
-  if (!trainingDataPromise) {
-    trainingDataPromise = readFile(
-      join(process.cwd(), "dataset_kematangan_tape_1000.csv"),
+function loadDatasetModel(): Promise<DatasetMaturityModel> {
+  if (!datasetModelPromise) {
+    datasetModelPromise = readFile(
+      join(process.cwd(), "lib", "model-kematangan.json"),
       "utf8",
     )
       .then((contents) => {
-        const lines = contents.replace(/^\uFEFF/, "").split(/\r?\n/);
-        const samples: TrainingSample[] = [];
-
-        for (const [index, line] of lines.slice(1).entries()) {
-          if (!line.trim()) continue;
-          const columns = line.split(",");
-          const temperature = Number(columns[1]);
-          const humidity = Number(columns[2]);
-          const alcoholGas = Number(columns[3]);
-          const label = columns[6]?.trim();
-
-          if (
-            !Number.isFinite(temperature) ||
-            !Number.isFinite(humidity) ||
-            !Number.isFinite(alcoholGas) ||
-            !label ||
-            !isMaturityLabel(label)
-          ) {
-            throw new Error(
-              `Baris ${index + 2} dataset kematangan tape tidak valid.`,
-            );
-          }
-
-          samples.push({
-            features: [temperature, humidity, alcoholGas],
-            label,
-          });
+        const model = parseDatasetModel(JSON.parse(contents));
+        if (!model) {
+          throw new Error("Format lib/model-kematangan.json tidak valid.");
         }
-
-        if (samples.length === 0) {
-          throw new Error("Dataset kematangan tape tidak memiliki data.");
-        }
-        return samples;
+        return model;
       })
       .catch((error: unknown) => {
-        trainingDataPromise = undefined;
+        datasetModelPromise = undefined;
         throw error;
       });
   }
-
-  return trainingDataPromise;
-}
-
-function getRecommendation(label: MaturityLabel, temperature: number): string {
-  const temperatureAdvice =
-    temperature < 28
-      ? "Suhu di bawah kisaran acuan 28–32 °C; hangatkan lingkungan secara bertahap."
-      : temperature > 32
-        ? "Suhu di atas kisaran acuan 28–32 °C; pindahkan ke tempat lebih sejuk."
-        : "";
-  const advice: Record<MaturityLabel, string> = {
-    "Belum Matang":
-      "Lanjutkan fermentasi dalam wadah bersih dan tertutup. Jaga suhu stabil, lalu periksa kembali sekitar 6 jam lagi.",
-    "Hampir Matang":
-      "Periksa aroma dan tekstur tanpa mencicipi bila ada tanda mencurigakan. Pantau kembali setiap 2–4 jam.",
-    Matang:
-      "Hentikan fermentasi dan simpan dalam wadah bersih tertutup di kulkas agar fermentasi melambat.",
-    "Overfermentasi / Busuk":
-      "Jangan dicicipi untuk menguji. Jika ada jamur, lendir, atau bau busuk/menyimpang, buang tape; model tidak dapat memastikan keamanan pangan.",
-  };
-  return [advice[label], temperatureAdvice].filter(Boolean).join(" ");
+  return datasetModelPromise;
 }
 
 function isPredictionInput(
   value: unknown,
-): value is { temp: number; hum: number; gas: number } {
-  if (typeof value !== "object" || value === null) return false;
+): value is { temp: number; hum: number } {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) {
+    return false;
+  }
   const input = value as Record<string, unknown>;
   return (
     typeof input.temp === "number" &&
@@ -107,30 +57,46 @@ function isPredictionInput(
     typeof input.hum === "number" &&
     Number.isFinite(input.hum) &&
     input.hum >= 0 &&
-    input.hum <= 100 &&
-    typeof input.gas === "number" &&
-    Number.isFinite(input.gas) &&
-    input.gas >= 0 &&
-    input.gas <= 4095
+    input.hum <= 100
   );
 }
 
-function standardDeviations(samples: TrainingSample[]): [number, number, number] {
-  const deviations = [0, 1, 2].map((featureIndex) => {
-    const mean =
-      samples.reduce(
-        (sum, sample) => sum + sample.features[featureIndex],
-        0,
-      ) / samples.length;
-    const variance =
-      samples.reduce(
-        (sum, sample) =>
-          sum + (sample.features[featureIndex] - mean) ** 2,
-        0,
-      ) / samples.length;
-    return Math.sqrt(variance) || 1;
-  });
-  return [deviations[0], deviations[1], deviations[2]];
+function getRecommendation(label: MaturityLabel, temperature: number): string {
+  const [minimum, maximum] = CONFIG.idealTemperature;
+  const temperatureAdvice =
+    temperature < minimum
+      ? `Suhu di bawah rentang data tape matang (${minimum}–${maximum} °C).`
+      : temperature > maximum
+        ? `Suhu di atas rentang data tape matang (${minimum}–${maximum} °C).`
+        : "";
+  const advice: Record<MaturityLabel, string> = {
+    "Belum Matang":
+      "Lanjutkan fermentasi dalam wadah bersih dan tertutup. Periksa kembali kondisi tape secara berkala.",
+    "Hampir Matang":
+      "Periksa aroma dan tekstur tanpa mencicipi bila ada tanda mencurigakan. Pantau kembali secara berkala.",
+    Matang:
+      "Hentikan fermentasi dan simpan dalam wadah bersih tertutup di kulkas agar fermentasi melambat.",
+    "Overfermentasi / Busuk":
+      "Jangan dicicipi untuk menguji. Jika ada jamur, lendir, atau bau busuk/menyimpang, buang tape; model tidak memastikan keamanan pangan.",
+  };
+  return [advice[label], temperatureAdvice].filter(Boolean).join(" ");
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : "Terjadi kesalahan saat memuat model.";
+}
+
+export async function GET() {
+  try {
+    return NextResponse.json(await loadDatasetModel());
+  } catch (error) {
+    const message = errorMessage(error);
+    console.error("Gagal membaca model kematangan:", message);
+    return NextResponse.json(
+      { error: `Model kematangan tidak tersedia: ${message}` },
+      { status: 500 },
+    );
+  }
 }
 
 export async function POST(request: Request) {
@@ -146,54 +112,23 @@ export async function POST(request: Request) {
 
   if (!isPredictionInput(input)) {
     return NextResponse.json(
-      { error: "Suhu, kelembapan, atau nilai gas sensor tidak valid." },
+      { error: "Suhu dan kelembapan harus berupa angka yang valid." },
       { status: 400 },
     );
   }
 
   try {
-    const samples = await loadTrainingData();
-    const deviations = standardDeviations(samples);
-    const normalizedGas = (input.gas / 4095) * 2795.3;
-    const features = [input.temp, input.hum, normalizedGas];
-    const neighbors = samples
-      .map((sample) => ({
-        label: sample.label,
-        distance: Math.sqrt(
-          sample.features.reduce(
-            (sum, value, index) =>
-              sum + ((value - features[index]) / deviations[index]) ** 2,
-            0,
-          ),
-        ),
-      }))
-      .sort((left, right) => left.distance - right.distance)
-      .slice(0, Math.min(K_NEIGHBORS, samples.length));
-
-    const votes = new Map<MaturityLabel, number>();
-    let totalWeight = 0;
-    for (const neighbor of neighbors) {
-      const weight = 1 / (neighbor.distance + 0.15);
-      votes.set(neighbor.label, (votes.get(neighbor.label) ?? 0) + weight);
-      totalWeight += weight;
-    }
-
-    const [label, winningWeight] = [...votes.entries()].sort(
-      (left, right) => right[1] - left[1],
-    )[0];
-
+    const model = await loadDatasetModel();
+    const result = classifyWithDatasetModel(model, input.temp, input.hum);
     return NextResponse.json({
-      label,
-      confidence: winningWeight / totalWeight,
-      recommendation: getRecommendation(label, input.temp),
-      sampleCount: samples.length,
+      ...result,
+      recommendation: getRecommendation(result.label, input.temp),
     });
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Gagal memuat model dataset.";
+    const message = errorMessage(error);
     console.error("Gagal memprediksi kematangan tape:", message);
     return NextResponse.json(
-      { error: `Prediksi AI gagal: ${message}` },
+      { error: `Prediksi model gagal: ${message}` },
       { status: 500 },
     );
   }

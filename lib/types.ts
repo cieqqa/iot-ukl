@@ -23,6 +23,19 @@ export type TapeModelResult = {
   sampleCount: number;
 };
 
+export type PredictionModelInfo =
+  | { status: "loading" }
+  | {
+      status: "ready";
+      sampleCount: number;
+      trainingSampleCount: number;
+      testSampleCount: number;
+      accuracy: number;
+      maeRemainingHours: null;
+      trainedAt: string;
+    }
+  | { status: "fallback"; message: string };
+
 export type ConnectionStatus = "connecting" | "online" | "demo" | "offline";
 
 export type EventLog = {

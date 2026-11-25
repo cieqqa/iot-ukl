@@ -1,0 +1,4101 @@
+{
+  "version": 1,
+  "method": "standardized-knn",
+  "k": 11,
+  "features": [
+    "temp",
+    "hum"
+  ],
+  "normalization": {
+    "mean": [
+      29.687249999999963,
+      77.76286249999997
+    ],
+    "std": [
+      1.766380249974505,
+      11.202584430884409
+    ],
+    "min": [
+      26.03,
+      58.05
+    ],
+    "max": [
+      33.98,
+      95.98
+    ]
+  },
+  "trainingSamples": [
+    {
+      "temp": 26.03,
+      "hum": 59.01,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.04,
+      "hum": 64.64,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.04,
+      "hum": 67.7,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.06,
+      "hum": 61.22,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.06,
+      "hum": 67.7,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.08,
+      "hum": 61.76,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.09,
+      "hum": 58.37,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.09,
+      "hum": 64.36,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.11,
+      "hum": 62.66,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.11,
+      "hum": 63.96,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.12,
+      "hum": 65.99,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.12,
+      "hum": 66.55,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.16,
+      "hum": 63.31,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.17,
+      "hum": 67.69,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.2,
+      "hum": 63.82,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.2,
+      "hum": 65.5,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.25,
+      "hum": 64.03,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.25,
+      "hum": 67.87,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.26,
+      "hum": 63.37,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.3,
+      "hum": 58.18,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.31,
+      "hum": 67.03,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.33,
+      "hum": 66.46,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.35,
+      "hum": 64.49,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.35,
+      "hum": 64.97,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.35,
+      "hum": 67.4,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.36,
+      "hum": 65.13,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.37,
+      "hum": 62.95,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.38,
+      "hum": 60.84,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.42,
+      "hum": 66.35,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.43,
+      "hum": 65.62,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.45,
+      "hum": 60.29,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.46,
+      "hum": 60.46,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.46,
+      "hum": 63.86,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.47,
+      "hum": 58.58,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.47,
+      "hum": 65.16,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.49,
+      "hum": 66.15,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.51,
+      "hum": 60.79,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.52,
+      "hum": 61.96,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.52,
+      "hum": 64.91,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.52,
+      "hum": 66.97,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.53,
+      "hum": 60.2,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.54,
+      "hum": 64.53,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.55,
+      "hum": 60.09,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.55,
+      "hum": 61.04,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.56,
+      "hum": 63.42,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.57,
+      "hum": 58.37,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.61,
+      "hum": 60.93,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.62,
+      "hum": 58.27,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.66,
+      "hum": 58.82,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.69,
+      "hum": 64.72,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.71,
+      "hum": 61.25,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.73,
+      "hum": 67.73,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.75,
+      "hum": 62.1,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.82,
+      "hum": 58.18,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.82,
+      "hum": 63.54,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.88,
+      "hum": 61.85,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.89,
+      "hum": 60.34,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.96,
+      "hum": 66.45,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.96,
+      "hum": 67.5,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.97,
+      "hum": 62.25,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.97,
+      "hum": 63.19,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 26.98,
+      "hum": 65.3,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.02,
+      "hum": 59.13,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.05,
+      "hum": 65.26,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.05,
+      "hum": 65.67,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.06,
+      "hum": 63.84,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.07,
+      "hum": 59.14,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.07,
+      "hum": 65.58,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.1,
+      "hum": 64.32,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.11,
+      "hum": 66.64,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.12,
+      "hum": 60.71,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.12,
+      "hum": 60.86,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.12,
+      "hum": 67.51,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.15,
+      "hum": 63.19,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.16,
+      "hum": 64.43,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.17,
+      "hum": 60.71,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.21,
+      "hum": 59.34,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.25,
+      "hum": 60.22,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.26,
+      "hum": 67.15,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.28,
+      "hum": 61.84,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.28,
+      "hum": 62.51,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.28,
+      "hum": 66.18,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.31,
+      "hum": 60.94,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.32,
+      "hum": 58.78,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.35,
+      "hum": 60.93,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.37,
+      "hum": 64.2,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.38,
+      "hum": 60.06,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.38,
+      "hum": 67.8,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.39,
+      "hum": 61.01,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.4,
+      "hum": 64.13,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.41,
+      "hum": 62.15,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.42,
+      "hum": 64.68,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.47,
+      "hum": 62.73,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.48,
+      "hum": 58.11,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.48,
+      "hum": 63.23,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.51,
+      "hum": 66.56,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.54,
+      "hum": 65.84,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.56,
+      "hum": 63.91,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.62,
+      "hum": 65.8,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.62,
+      "hum": 65.91,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.63,
+      "hum": 59.41,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.65,
+      "hum": 58.87,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.65,
+      "hum": 62.42,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.65,
+      "hum": 64.92,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.65,
+      "hum": 65.15,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.67,
+      "hum": 63.72,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.67,
+      "hum": 67.36,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.68,
+      "hum": 59.55,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.71,
+      "hum": 65.62,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.74,
+      "hum": 58.91,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.77,
+      "hum": 61.92,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.78,
+      "hum": 61.81,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.83,
+      "hum": 60.89,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.84,
+      "hum": 59.39,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.84,
+      "hum": 62.18,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.85,
+      "hum": 60.33,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.85,
+      "hum": 64.35,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.85,
+      "hum": 67.9,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.88,
+      "hum": 59.31,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.89,
+      "hum": 64.96,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.92,
+      "hum": 61.98,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.93,
+      "hum": 58.27,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.93,
+      "hum": 58.84,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.97,
+      "hum": 63.68,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.98,
+      "hum": 66.17,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 27.99,
+      "hum": 67.37,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.03,
+      "hum": 58.17,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.04,
+      "hum": 85.16,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.08,
+      "hum": 79.24,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.09,
+      "hum": 60.97,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.09,
+      "hum": 61.4,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.09,
+      "hum": 63.36,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.1,
+      "hum": 86.39,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.12,
+      "hum": 59.53,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.14,
+      "hum": 66.95,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.17,
+      "hum": 62.96,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.17,
+      "hum": 66.56,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.19,
+      "hum": 65.71,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.21,
+      "hum": 63.54,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.21,
+      "hum": 67.34,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.22,
+      "hum": 64.97,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.25,
+      "hum": 86.83,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.27,
+      "hum": 58.25,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.27,
+      "hum": 78.95,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.27,
+      "hum": 84.48,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.27,
+      "hum": 86.77,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.28,
+      "hum": 63.96,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.28,
+      "hum": 82.74,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.3,
+      "hum": 81.88,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.31,
+      "hum": 64.83,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.31,
+      "hum": 84.96,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.32,
+      "hum": 59.99,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.33,
+      "hum": 62.53,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.33,
+      "hum": 63.58,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.36,
+      "hum": 58.89,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.36,
+      "hum": 60,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.37,
+      "hum": 85.48,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.38,
+      "hum": 63.03,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.4,
+      "hum": 64.95,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.41,
+      "hum": 58.05,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.41,
+      "hum": 60.82,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.41,
+      "hum": 81.6,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.41,
+      "hum": 83.14,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.42,
+      "hum": 66.96,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.43,
+      "hum": 66.1,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.44,
+      "hum": 68,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.44,
+      "hum": 80.89,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.44,
+      "hum": 86.54,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.45,
+      "hum": 60.24,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.45,
+      "hum": 60.58,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.45,
+      "hum": 66.32,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.47,
+      "hum": 61.48,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.47,
+      "hum": 79.65,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.48,
+      "hum": 59.29,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.49,
+      "hum": 86.89,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.51,
+      "hum": 85.66,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.52,
+      "hum": 74.47,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.52,
+      "hum": 80.56,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.56,
+      "hum": 83.71,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.57,
+      "hum": 68.65,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.57,
+      "hum": 71.08,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.57,
+      "hum": 84.92,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.58,
+      "hum": 68.63,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.58,
+      "hum": 77.36,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.59,
+      "hum": 64.23,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.59,
+      "hum": 71.03,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.59,
+      "hum": 78.08,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.59,
+      "hum": 87.73,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.6,
+      "hum": 77.02,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.6,
+      "hum": 87.68,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.61,
+      "hum": 62.87,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.61,
+      "hum": 65.77,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.61,
+      "hum": 66.04,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.61,
+      "hum": 67.73,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.61,
+      "hum": 69.23,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.61,
+      "hum": 83.73,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.62,
+      "hum": 63.29,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.62,
+      "hum": 67.32,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.62,
+      "hum": 67.84,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.62,
+      "hum": 78.83,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.62,
+      "hum": 82.87,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.63,
+      "hum": 61.92,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.64,
+      "hum": 65.97,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.64,
+      "hum": 84.74,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.65,
+      "hum": 71.34,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.65,
+      "hum": 77.34,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.66,
+      "hum": 73.09,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.66,
+      "hum": 73.13,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.67,
+      "hum": 61.38,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.67,
+      "hum": 63.94,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.67,
+      "hum": 67.56,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.67,
+      "hum": 68.26,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.67,
+      "hum": 83,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.67,
+      "hum": 85.81,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.68,
+      "hum": 60.3,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.68,
+      "hum": 66.17,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.68,
+      "hum": 71.92,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.69,
+      "hum": 61.89,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.69,
+      "hum": 83,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.7,
+      "hum": 61.84,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.7,
+      "hum": 75.28,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.7,
+      "hum": 76.95,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.71,
+      "hum": 75.16,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.72,
+      "hum": 60.4,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.72,
+      "hum": 70.21,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.72,
+      "hum": 86,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.72,
+      "hum": 87.71,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.73,
+      "hum": 63.83,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.73,
+      "hum": 77.1,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.73,
+      "hum": 86.26,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.74,
+      "hum": 68.24,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.74,
+      "hum": 84.64,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.76,
+      "hum": 58.61,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.76,
+      "hum": 61.46,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.76,
+      "hum": 70.42,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.76,
+      "hum": 74.41,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.77,
+      "hum": 58.88,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.78,
+      "hum": 59.81,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.78,
+      "hum": 62.28,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.78,
+      "hum": 81.45,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.79,
+      "hum": 66.58,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.8,
+      "hum": 72.1,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.8,
+      "hum": 77.02,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.8,
+      "hum": 82.18,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.81,
+      "hum": 64.88,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.82,
+      "hum": 59.81,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.82,
+      "hum": 67.54,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.82,
+      "hum": 81.4,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.82,
+      "hum": 82.83,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.82,
+      "hum": 83.08,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.83,
+      "hum": 64.5,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.83,
+      "hum": 66.5,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.83,
+      "hum": 70.75,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.84,
+      "hum": 67.86,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.84,
+      "hum": 74.95,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.84,
+      "hum": 81.69,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.85,
+      "hum": 59.47,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.85,
+      "hum": 59.51,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.85,
+      "hum": 70.02,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.85,
+      "hum": 72.44,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.85,
+      "hum": 84.64,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.86,
+      "hum": 64.06,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.86,
+      "hum": 69.21,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.86,
+      "hum": 82.25,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.88,
+      "hum": 68.61,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.88,
+      "hum": 72.4,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.88,
+      "hum": 75.37,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.89,
+      "hum": 60.52,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.89,
+      "hum": 61.42,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.9,
+      "hum": 68.23,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.91,
+      "hum": 65.75,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.92,
+      "hum": 69.68,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.93,
+      "hum": 63.16,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.94,
+      "hum": 73.03,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.94,
+      "hum": 74.93,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.94,
+      "hum": 80.2,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.95,
+      "hum": 59.12,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.95,
+      "hum": 66.39,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.95,
+      "hum": 78.5,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.97,
+      "hum": 61.22,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.97,
+      "hum": 62.13,
+      "label": "Belum Matang"
+    },
+    {
+      "temp": 28.97,
+      "hum": 76.03,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.97,
+      "hum": 87.61,
+      "label": "Matang"
+    },
+    {
+      "temp": 28.98,
+      "hum": 71.23,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 28.99,
+      "hum": 84.41,
+      "label": "Matang"
+    },
+    {
+      "temp": 29,
+      "hum": 69.67,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29,
+      "hum": 71.95,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29,
+      "hum": 73.65,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.01,
+      "hum": 69.12,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.01,
+      "hum": 69.21,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.01,
+      "hum": 77.58,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.03,
+      "hum": 74.11,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.03,
+      "hum": 91.23,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.03,
+      "hum": 91.87,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.05,
+      "hum": 78.01,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.06,
+      "hum": 84.02,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.06,
+      "hum": 92.32,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.07,
+      "hum": 77.64,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.07,
+      "hum": 78.15,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.07,
+      "hum": 86.35,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.08,
+      "hum": 71.91,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.08,
+      "hum": 80.48,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.08,
+      "hum": 93.83,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.08,
+      "hum": 94.55,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.09,
+      "hum": 68.73,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.09,
+      "hum": 71.73,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.1,
+      "hum": 79.56,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.11,
+      "hum": 82.32,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.11,
+      "hum": 85.98,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.12,
+      "hum": 69.6,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.12,
+      "hum": 80.11,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.13,
+      "hum": 75.55,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.13,
+      "hum": 92.83,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.14,
+      "hum": 68.6,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.14,
+      "hum": 71.62,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.14,
+      "hum": 72.63,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.14,
+      "hum": 82.33,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.15,
+      "hum": 70.47,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.15,
+      "hum": 75.31,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.15,
+      "hum": 81.68,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.15,
+      "hum": 86.03,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.16,
+      "hum": 82.7,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.17,
+      "hum": 75.98,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.18,
+      "hum": 77.66,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.18,
+      "hum": 79.37,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.18,
+      "hum": 80.32,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.19,
+      "hum": 76.77,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.19,
+      "hum": 78.92,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.19,
+      "hum": 79.05,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.2,
+      "hum": 84.46,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.2,
+      "hum": 90.18,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.21,
+      "hum": 70.03,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.21,
+      "hum": 76.16,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.23,
+      "hum": 86.22,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.25,
+      "hum": 81.4,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.26,
+      "hum": 68.81,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.26,
+      "hum": 70.13,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.26,
+      "hum": 70.59,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.26,
+      "hum": 76.29,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.26,
+      "hum": 76.77,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.26,
+      "hum": 83.38,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.27,
+      "hum": 92.8,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.27,
+      "hum": 93.74,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.28,
+      "hum": 74.1,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.29,
+      "hum": 74.88,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.29,
+      "hum": 76.57,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.29,
+      "hum": 86.98,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.3,
+      "hum": 92.83,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.3,
+      "hum": 93.54,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.31,
+      "hum": 75.73,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.31,
+      "hum": 82.54,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.31,
+      "hum": 88.57,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.33,
+      "hum": 84.94,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.33,
+      "hum": 86.55,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.34,
+      "hum": 69.74,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.34,
+      "hum": 78.67,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.34,
+      "hum": 85.33,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.34,
+      "hum": 89.5,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.36,
+      "hum": 69.54,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.37,
+      "hum": 69.14,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.37,
+      "hum": 83.28,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.37,
+      "hum": 86.35,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.38,
+      "hum": 70.37,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.38,
+      "hum": 88.03,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.38,
+      "hum": 90.84,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.4,
+      "hum": 79.11,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.4,
+      "hum": 81.73,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.4,
+      "hum": 89.18,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.4,
+      "hum": 91.81,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.4,
+      "hum": 95.52,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.42,
+      "hum": 71.96,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.42,
+      "hum": 89.69,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.42,
+      "hum": 91.73,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.43,
+      "hum": 72.32,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.44,
+      "hum": 69.67,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.44,
+      "hum": 87.57,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.44,
+      "hum": 91.02,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.45,
+      "hum": 76.78,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.46,
+      "hum": 72.56,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.46,
+      "hum": 80.25,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.47,
+      "hum": 71.86,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.47,
+      "hum": 82.32,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.47,
+      "hum": 86.95,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.48,
+      "hum": 74.51,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.48,
+      "hum": 87.21,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.49,
+      "hum": 68.87,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.49,
+      "hum": 79.95,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.49,
+      "hum": 95.65,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.5,
+      "hum": 73.8,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.51,
+      "hum": 89.01,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.52,
+      "hum": 79.63,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.52,
+      "hum": 92.61,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.53,
+      "hum": 71.47,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.53,
+      "hum": 95.63,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.55,
+      "hum": 84.74,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.56,
+      "hum": 71.46,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.56,
+      "hum": 74.68,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.56,
+      "hum": 80.29,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.58,
+      "hum": 70.01,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.59,
+      "hum": 88,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.6,
+      "hum": 90.5,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.6,
+      "hum": 92.1,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.6,
+      "hum": 93.88,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.62,
+      "hum": 72.6,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.62,
+      "hum": 88.56,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.62,
+      "hum": 92.15,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.64,
+      "hum": 73.16,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.64,
+      "hum": 76.44,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.64,
+      "hum": 79.3,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.65,
+      "hum": 68.09,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.65,
+      "hum": 72.85,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.65,
+      "hum": 75.85,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.66,
+      "hum": 68.6,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.66,
+      "hum": 82.29,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.67,
+      "hum": 71.01,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.67,
+      "hum": 86.22,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.69,
+      "hum": 76.44,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.7,
+      "hum": 68.19,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.73,
+      "hum": 73.77,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.73,
+      "hum": 78.44,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.73,
+      "hum": 87.97,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.74,
+      "hum": 69.05,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.74,
+      "hum": 74.18,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.74,
+      "hum": 85.23,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.75,
+      "hum": 80.35,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.75,
+      "hum": 86.39,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.77,
+      "hum": 76.74,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.77,
+      "hum": 93.82,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.79,
+      "hum": 68.88,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.79,
+      "hum": 72.4,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.8,
+      "hum": 68.64,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.8,
+      "hum": 72.79,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.8,
+      "hum": 87.58,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.8,
+      "hum": 93.53,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.81,
+      "hum": 79.83,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.81,
+      "hum": 91.77,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.81,
+      "hum": 93.87,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.81,
+      "hum": 95.73,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.82,
+      "hum": 84.75,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.84,
+      "hum": 70.15,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.84,
+      "hum": 94.83,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.85,
+      "hum": 76.42,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.86,
+      "hum": 73.9,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.86,
+      "hum": 92.14,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.88,
+      "hum": 73.42,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.88,
+      "hum": 84.62,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.88,
+      "hum": 95.9,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.89,
+      "hum": 68.05,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.89,
+      "hum": 75.19,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.89,
+      "hum": 86.8,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.89,
+      "hum": 93.78,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.92,
+      "hum": 75.38,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.92,
+      "hum": 84.62,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.93,
+      "hum": 86.38,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.93,
+      "hum": 88.21,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.93,
+      "hum": 92.33,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.94,
+      "hum": 87.21,
+      "label": "Matang"
+    },
+    {
+      "temp": 29.95,
+      "hum": 70.74,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.95,
+      "hum": 73.61,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.96,
+      "hum": 71.71,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.96,
+      "hum": 89.17,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 29.97,
+      "hum": 69.68,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.97,
+      "hum": 69.84,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 29.99,
+      "hum": 94.27,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30,
+      "hum": 73.16,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30,
+      "hum": 75.44,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.01,
+      "hum": 71.65,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.01,
+      "hum": 76.27,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.02,
+      "hum": 80.21,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.02,
+      "hum": 87.41,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.02,
+      "hum": 91.75,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.03,
+      "hum": 70.81,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.04,
+      "hum": 78.47,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.04,
+      "hum": 83.01,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.05,
+      "hum": 75.02,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.06,
+      "hum": 79.61,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.07,
+      "hum": 88.54,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.08,
+      "hum": 73.92,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.08,
+      "hum": 84.78,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.08,
+      "hum": 95.74,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.09,
+      "hum": 77.13,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.09,
+      "hum": 87.76,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.11,
+      "hum": 73.26,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.12,
+      "hum": 83.95,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.13,
+      "hum": 70,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.13,
+      "hum": 74.21,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.13,
+      "hum": 76.46,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.13,
+      "hum": 79.15,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.14,
+      "hum": 69.28,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.14,
+      "hum": 77.57,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.14,
+      "hum": 81.57,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.15,
+      "hum": 75.64,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.17,
+      "hum": 72.62,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.17,
+      "hum": 74.19,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.17,
+      "hum": 74.35,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.17,
+      "hum": 74.79,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.17,
+      "hum": 76.08,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.19,
+      "hum": 78.66,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.21,
+      "hum": 83.03,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.22,
+      "hum": 68.7,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.23,
+      "hum": 70.01,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.23,
+      "hum": 77.91,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.24,
+      "hum": 68.03,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.25,
+      "hum": 88.59,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.26,
+      "hum": 73.41,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.26,
+      "hum": 81.13,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.26,
+      "hum": 87.29,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.27,
+      "hum": 69.07,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.29,
+      "hum": 79.43,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.29,
+      "hum": 91.72,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.3,
+      "hum": 95.09,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.31,
+      "hum": 68.68,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.31,
+      "hum": 76.86,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.31,
+      "hum": 93.56,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.32,
+      "hum": 83.17,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.32,
+      "hum": 87.91,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.33,
+      "hum": 74.16,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.34,
+      "hum": 89.59,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.35,
+      "hum": 89.99,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.36,
+      "hum": 84.61,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.36,
+      "hum": 89.74,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.37,
+      "hum": 81.55,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.38,
+      "hum": 68.71,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.38,
+      "hum": 76.05,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.39,
+      "hum": 69.28,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.39,
+      "hum": 95.53,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.4,
+      "hum": 72.5,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.4,
+      "hum": 90.8,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.41,
+      "hum": 69.59,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.42,
+      "hum": 90.31,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.43,
+      "hum": 74.02,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.44,
+      "hum": 74.56,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.44,
+      "hum": 74.61,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.44,
+      "hum": 77.64,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.47,
+      "hum": 70.01,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.47,
+      "hum": 89.68,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.47,
+      "hum": 92.2,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.48,
+      "hum": 73.78,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.48,
+      "hum": 83.63,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.48,
+      "hum": 89.15,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.48,
+      "hum": 95.51,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.49,
+      "hum": 72.82,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.5,
+      "hum": 78.72,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.5,
+      "hum": 80.74,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.5,
+      "hum": 92.77,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.51,
+      "hum": 73.05,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.51,
+      "hum": 73.72,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.52,
+      "hum": 78.54,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.52,
+      "hum": 80.48,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.52,
+      "hum": 95.46,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.53,
+      "hum": 75.18,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.53,
+      "hum": 85.04,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.54,
+      "hum": 70.14,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.54,
+      "hum": 92.91,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.55,
+      "hum": 72.59,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.55,
+      "hum": 73.41,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.55,
+      "hum": 80.42,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.55,
+      "hum": 81.25,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.56,
+      "hum": 87.79,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.56,
+      "hum": 91.29,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.57,
+      "hum": 72.31,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.57,
+      "hum": 75.34,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.58,
+      "hum": 80.3,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.58,
+      "hum": 94.47,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.6,
+      "hum": 86.04,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.6,
+      "hum": 87.36,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.6,
+      "hum": 89.31,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.6,
+      "hum": 92.77,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.62,
+      "hum": 80.6,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.62,
+      "hum": 93.41,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.63,
+      "hum": 70.09,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.63,
+      "hum": 73.61,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.63,
+      "hum": 80.4,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.63,
+      "hum": 85.66,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.65,
+      "hum": 85.42,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.67,
+      "hum": 69.31,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.67,
+      "hum": 73.79,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.67,
+      "hum": 87.66,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.68,
+      "hum": 70.39,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.68,
+      "hum": 77.01,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.69,
+      "hum": 80.21,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.69,
+      "hum": 87.77,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.7,
+      "hum": 74.51,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.7,
+      "hum": 88.5,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.7,
+      "hum": 95.34,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.71,
+      "hum": 86.28,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.71,
+      "hum": 89.08,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.72,
+      "hum": 72.5,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.72,
+      "hum": 82.08,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.73,
+      "hum": 68.79,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.74,
+      "hum": 74.37,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.75,
+      "hum": 69.16,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.76,
+      "hum": 95.28,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.77,
+      "hum": 91.31,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.78,
+      "hum": 70.11,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.78,
+      "hum": 85.29,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.79,
+      "hum": 73.33,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.8,
+      "hum": 70.8,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.8,
+      "hum": 85.27,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.82,
+      "hum": 82.23,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.82,
+      "hum": 82.55,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.83,
+      "hum": 74.43,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.83,
+      "hum": 74.9,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.83,
+      "hum": 84.1,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.84,
+      "hum": 68.39,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.84,
+      "hum": 68.43,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.84,
+      "hum": 73.54,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.85,
+      "hum": 70.59,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.85,
+      "hum": 76.71,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.85,
+      "hum": 87.81,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.88,
+      "hum": 74.02,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.88,
+      "hum": 95.01,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.89,
+      "hum": 75.38,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.89,
+      "hum": 84.57,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.9,
+      "hum": 83.74,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.9,
+      "hum": 94.47,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.91,
+      "hum": 68.05,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.91,
+      "hum": 71.84,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.91,
+      "hum": 72.32,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.91,
+      "hum": 73.6,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.91,
+      "hum": 89.06,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.92,
+      "hum": 68.94,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.92,
+      "hum": 70.95,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.94,
+      "hum": 89.92,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.95,
+      "hum": 72.83,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.95,
+      "hum": 74.02,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.95,
+      "hum": 74.34,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.95,
+      "hum": 86.83,
+      "label": "Matang"
+    },
+    {
+      "temp": 30.96,
+      "hum": 95.58,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.97,
+      "hum": 89.11,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.97,
+      "hum": 89.9,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.98,
+      "hum": 76.8,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.98,
+      "hum": 88.41,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.98,
+      "hum": 89.06,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.98,
+      "hum": 89.45,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 30.99,
+      "hum": 68.58,
+      "label": "Hampir Matang"
+    },
+    {
+      "temp": 30.99,
+      "hum": 82.74,
+      "label": "Matang"
+    },
+    {
+      "temp": 31,
+      "hum": 79.25,
+      "label": "Matang"
+    },
+    {
+      "temp": 31,
+      "hum": 79.52,
+      "label": "Matang"
+    },
+    {
+      "temp": 31,
+      "hum": 87.08,
+      "label": "Matang"
+    },
+    {
+      "temp": 31,
+      "hum": 90.61,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.01,
+      "hum": 86.03,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.01,
+      "hum": 92.16,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.04,
+      "hum": 92.17,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.06,
+      "hum": 84.24,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.06,
+      "hum": 89.92,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.08,
+      "hum": 81.98,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.09,
+      "hum": 83.18,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.09,
+      "hum": 91.66,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.1,
+      "hum": 89.35,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.1,
+      "hum": 92.63,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.11,
+      "hum": 85.61,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.11,
+      "hum": 94.28,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.12,
+      "hum": 90.74,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.14,
+      "hum": 87.91,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.14,
+      "hum": 90.64,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.15,
+      "hum": 94,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.16,
+      "hum": 86.92,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.16,
+      "hum": 91.03,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.17,
+      "hum": 87.08,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.18,
+      "hum": 80.72,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.18,
+      "hum": 85.07,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.21,
+      "hum": 87.61,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.21,
+      "hum": 88.39,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.21,
+      "hum": 90.68,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.21,
+      "hum": 93.19,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.22,
+      "hum": 86.23,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.23,
+      "hum": 79.2,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.23,
+      "hum": 88.99,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.29,
+      "hum": 86.04,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.29,
+      "hum": 86.43,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.31,
+      "hum": 83.25,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.31,
+      "hum": 85.65,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.33,
+      "hum": 88.11,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.34,
+      "hum": 85.4,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.35,
+      "hum": 86.59,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.38,
+      "hum": 95.18,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.39,
+      "hum": 85.29,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.39,
+      "hum": 92.68,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.42,
+      "hum": 91.35,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.42,
+      "hum": 92.11,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.42,
+      "hum": 95.9,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.45,
+      "hum": 91.32,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.46,
+      "hum": 79.57,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.46,
+      "hum": 87.47,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.47,
+      "hum": 80.82,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.5,
+      "hum": 83.39,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.5,
+      "hum": 93.4,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.51,
+      "hum": 85.39,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.51,
+      "hum": 93.85,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.52,
+      "hum": 80.43,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.54,
+      "hum": 85.39,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.56,
+      "hum": 80.42,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.56,
+      "hum": 83.79,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.56,
+      "hum": 92.83,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.57,
+      "hum": 88.68,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.58,
+      "hum": 87.46,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.59,
+      "hum": 85.83,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.61,
+      "hum": 86.07,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.62,
+      "hum": 86.17,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.66,
+      "hum": 88.26,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.68,
+      "hum": 87.93,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.7,
+      "hum": 88.63,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.71,
+      "hum": 78.19,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.72,
+      "hum": 88.62,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.73,
+      "hum": 89.63,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.73,
+      "hum": 91.34,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.73,
+      "hum": 95.22,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.75,
+      "hum": 78.85,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.76,
+      "hum": 83.07,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.82,
+      "hum": 83.23,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.82,
+      "hum": 92,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.83,
+      "hum": 83.3,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.86,
+      "hum": 78.89,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.87,
+      "hum": 78.52,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.87,
+      "hum": 84.04,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.88,
+      "hum": 89.65,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.88,
+      "hum": 91.43,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.89,
+      "hum": 90.87,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.9,
+      "hum": 95.49,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.91,
+      "hum": 85.57,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.91,
+      "hum": 91.21,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.94,
+      "hum": 91.41,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 31.98,
+      "hum": 86.25,
+      "label": "Matang"
+    },
+    {
+      "temp": 31.98,
+      "hum": 94.98,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.03,
+      "hum": 89.76,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.05,
+      "hum": 91.91,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.16,
+      "hum": 89.03,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.16,
+      "hum": 91.41,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.18,
+      "hum": 90.85,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.23,
+      "hum": 93.96,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.24,
+      "hum": 95.64,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.25,
+      "hum": 88.83,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.28,
+      "hum": 95.77,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.29,
+      "hum": 92.26,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.29,
+      "hum": 95.98,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.32,
+      "hum": 95.72,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.33,
+      "hum": 88.64,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.36,
+      "hum": 90.17,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.38,
+      "hum": 91.17,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.38,
+      "hum": 93.44,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.39,
+      "hum": 92.38,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.41,
+      "hum": 90.65,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.42,
+      "hum": 95.59,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.55,
+      "hum": 88.84,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.59,
+      "hum": 88.88,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.6,
+      "hum": 90.3,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.65,
+      "hum": 90.92,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.71,
+      "hum": 88.2,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.71,
+      "hum": 93.42,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.74,
+      "hum": 90.86,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.76,
+      "hum": 92.25,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.77,
+      "hum": 94.98,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.79,
+      "hum": 95.18,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.94,
+      "hum": 90.45,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 32.98,
+      "hum": 93.92,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.06,
+      "hum": 88.11,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.07,
+      "hum": 92.89,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.1,
+      "hum": 88.33,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.12,
+      "hum": 89.17,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.14,
+      "hum": 88,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.16,
+      "hum": 94.45,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.21,
+      "hum": 90.37,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.25,
+      "hum": 89.57,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.29,
+      "hum": 94.12,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.33,
+      "hum": 88.08,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.33,
+      "hum": 90.32,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.34,
+      "hum": 95.41,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.37,
+      "hum": 94.64,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.4,
+      "hum": 92.04,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.42,
+      "hum": 90.74,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.42,
+      "hum": 92.43,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.43,
+      "hum": 88.38,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.48,
+      "hum": 94.77,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.48,
+      "hum": 95.27,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.49,
+      "hum": 90.05,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.52,
+      "hum": 91,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.54,
+      "hum": 95.93,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.58,
+      "hum": 90.62,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.65,
+      "hum": 88.76,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.66,
+      "hum": 88.16,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.66,
+      "hum": 94.57,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.67,
+      "hum": 93.51,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.67,
+      "hum": 95.27,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.67,
+      "hum": 95.33,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.69,
+      "hum": 89.45,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.73,
+      "hum": 91.2,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.75,
+      "hum": 88.18,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.76,
+      "hum": 90.63,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.76,
+      "hum": 93.9,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.78,
+      "hum": 95.63,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.83,
+      "hum": 91.15,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.87,
+      "hum": 92.35,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.88,
+      "hum": 92.59,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.89,
+      "hum": 89.45,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.89,
+      "hum": 89.94,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.91,
+      "hum": 91.05,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.94,
+      "hum": 95.82,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.96,
+      "hum": 94.86,
+      "label": "Overfermentasi / Busuk"
+    },
+    {
+      "temp": 33.98,
+      "hum": 92.66,
+      "label": "Overfermentasi / Busuk"
+    }
+  ],
+  "metadata": {
+    "trainedAt": "2026-11-24T05:23:37.732Z",
+    "sampleCount": 1000,
+    "trainingSampleCount": 800,
+    "testSampleCount": 200,
+    "accuracy": 0.985,
+    "maeRemainingHours": null,
+    "split": "stratified random by label; no batch column is present",
+    "seed": 20261124,
+    "classCounts": {
+      "Belum Matang": 250,
+      "Hampir Matang": 250,
+      "Matang": 250,
+      "Overfermentasi / Busuk": 250
+    },
+    "confusionMatrix": {
+      "Belum Matang": {
+        "Belum Matang": 50,
+        "Hampir Matang": 0,
+        "Matang": 0,
+        "Overfermentasi / Busuk": 0
+      },
+      "Hampir Matang": {
+        "Belum Matang": 0,
+        "Hampir Matang": 50,
+        "Matang": 0,
+        "Overfermentasi / Busuk": 0
+      },
+      "Matang": {
+        "Belum Matang": 0,
+        "Hampir Matang": 1,
+        "Matang": 49,
+        "Overfermentasi / Busuk": 0
+      },
+      "Overfermentasi / Busuk": {
+        "Belum Matang": 0,
+        "Hampir Matang": 0,
+        "Matang": 2,
+        "Overfermentasi / Busuk": 48
+      }
+    },
+    "examples": [
+      {
+        "sourceNo": 27,
+        "temp": 26.49,
+        "hum": 67.11,
+        "actual": "Belum Matang",
+        "predicted": "Belum Matang"
+      },
+      {
+        "sourceNo": 31,
+        "temp": 29.27,
+        "hum": 74.24,
+        "actual": "Hampir Matang",
+        "predicted": "Hampir Matang"
+      },
+      {
+        "sourceNo": 3,
+        "temp": 30.45,
+        "hum": 84.78,
+        "actual": "Matang",
+        "predicted": "Matang"
+      },
+      {
+        "sourceNo": 15,
+        "temp": 30.85,
+        "hum": 90.86,
+        "actual": "Overfermentasi / Busuk",
+        "predicted": "Overfermentasi / Busuk"
+      }
+    ]
+  }
+}
