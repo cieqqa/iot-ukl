@@ -14,13 +14,6 @@ export const dynamic = "force-dynamic";
 
 let datasetModelPromise: Promise<DatasetMaturityModel> | undefined;
 
-const LABELS: readonly MaturityLabel[] = [
-  "Belum Matang",
-  "Hampir Matang",
-  "Matang",
-  "Overfermentasi / Busuk",
-];
-
 function loadDatasetModel(): Promise<DatasetMaturityModel> {
   if (!datasetModelPromise) {
     datasetModelPromise = readFile(
