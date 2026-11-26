@@ -67,6 +67,15 @@ function parseSensorRows(value: unknown): SensorRow[] {
   });
 }
 
+function getApiErrorMessage(value: unknown): string | null {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) {
+    return null;
+  }
+
+  const error = (value as Record<string, unknown>).error;
+  return typeof error === "string" && error.trim() ? error : null;
+}
+
 function asSamples(rows: SensorRow[]): SensorSample[] {
   return rows.map((row) => ({
     temp: row.temp,
@@ -300,8 +309,8 @@ export default function Dashboard() {
       return () => window.clearInterval(timer);
     }
 
-    let failures = 0;
     let polling = false;
+    let timer: number | undefined;
 
     const poll = async () => {
       if (polling) return;
@@ -314,11 +323,13 @@ export default function Dashboard() {
           { cache: "no-store" },
         );
         if (!response.ok) {
-          throw new Error(`Server merespons dengan status ${response.status}.`);
+          const errorMessage = getApiErrorMessage(await response.json());
+          throw new Error(
+            errorMessage ?? `Server merespons dengan status ${response.status}.`,
+          );
         }
 
         const rows = parseSensorRows(await response.json());
-        failures = 0;
         const samples = asSamples(rows);
         setReadings(samples);
 
@@ -338,11 +349,15 @@ export default function Dashboard() {
           setConnectionText("ESP mengirim data");
         }
       } catch (error) {
-        failures += 1;
-        console.error("Gagal mengambil data sensor:", error);
-        if (failures >= 2) {
-          setConnection("offline");
-          setConnectionText("Server tidak terjangkau");
+        const message =
+          error instanceof Error ? error.message : "Gagal mengambil data sensor.";
+        setConnection("offline");
+        setConnectionText(message);
+        if (
+          message.startsWith("SUPABASE_URL") ||
+          message.startsWith("Konfigurasi Supabase")
+        ) {
+          if (timer !== undefined) window.clearInterval(timer);
         }
       } finally {
         polling = false;
@@ -350,11 +365,13 @@ export default function Dashboard() {
     };
 
     void poll();
-    const timer = window.setInterval(
+    timer = window.setInterval(
       () => void poll(),
       CONFIG.pollIntervalMs,
     );
-    return () => window.clearInterval(timer);
+    return () => {
+      if (timer !== undefined) window.clearInterval(timer);
+    };
   }, [demo, mounted]);
 
   useEffect(() => {

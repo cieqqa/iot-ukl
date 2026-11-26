@@ -25,9 +25,26 @@ function getSupabaseClient():
     };
   }
 
+  let supabaseUrl: URL;
+  try {
+    supabaseUrl = new URL(url);
+  } catch {
+    return { error: "SUPABASE_URL harus berupa URL yang valid." };
+  }
+
+  if (supabaseUrl.hostname === "project-id.supabase.co") {
+    return {
+      error: "SUPABASE_URL masih berupa contoh.",
+    };
+  }
+
+  if (supabaseUrl.protocol !== "https:" && supabaseUrl.protocol !== "http:") {
+    return { error: "SUPABASE_URL harus menggunakan HTTP atau HTTPS." };
+  }
+
   if (!supabaseClient) {
     try {
-      supabaseClient = createClient(url, serviceRoleKey);
+      supabaseClient = createClient(supabaseUrl.toString(), serviceRoleKey);
     } catch (error) {
       const message =
         error instanceof Error
