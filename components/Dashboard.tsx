@@ -1,12 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import AiAdvisor from "@/components/AiAdvisor";
 import Hero from "@/components/Hero";
 import History from "@/components/History";
 import Navbar from "@/components/Navbar";
 import Prediction from "@/components/Prediction";
 import SensorCards from "@/components/SensorCards";
+import SensorInsights from "@/components/SensorInsights";
 import Stages from "@/components/Stages";
 import { CONFIG } from "@/lib/config";
 import { createDemoHistory, createDemoReading } from "@/lib/demo";
@@ -15,11 +15,9 @@ import { activateDatasetModel, predict } from "@/lib/predict";
 import type {
   ConnectionStatus,
   EventLog,
-  MaturityLabel,
   SensorKey,
   SensorRow,
   SensorSample,
-  TapeModelResult,
   PredictionModelInfo,
 } from "@/lib/types";
 
@@ -86,41 +84,6 @@ function asSamples(rows: SensorRow[]): SensorSample[] {
   }));
 }
 
-function parseTapeModelResult(value: unknown): TapeModelResult {
-  if (typeof value !== "object" || value === null) {
-    throw new Error("Format hasil prediksi AI tidak valid.");
-  }
-
-  const result = value as Record<string, unknown>;
-  const labels: MaturityLabel[] = [
-    "Belum Matang",
-    "Hampir Matang",
-    "Matang",
-    "Overfermentasi / Busuk",
-  ];
-  if (
-    typeof result.label !== "string" ||
-    !labels.includes(result.label as MaturityLabel) ||
-    typeof result.confidence !== "number" ||
-    !Number.isFinite(result.confidence) ||
-    result.confidence < 0 ||
-    result.confidence > 1 ||
-    typeof result.recommendation !== "string" ||
-    typeof result.sampleCount !== "number" ||
-    !Number.isInteger(result.sampleCount) ||
-    result.sampleCount < 1
-  ) {
-    throw new Error("Hasil prediksi AI berisi data yang tidak valid.");
-  }
-
-  return {
-    label: result.label as MaturityLabel,
-    confidence: result.confidence,
-    recommendation: result.recommendation,
-    sampleCount: result.sampleCount,
-  };
-}
-
 function readStoredBatchStart(): number | null {
   const value = localStorage.getItem(BATCH_STORAGE_KEY);
   if (value === null) return null;
@@ -136,6 +99,7 @@ export default function Dashboard() {
   const [mounted, setMounted] = useState(false);
   const [demo, setDemo] = useState(false);
   const [readings, setReadings] = useState<SensorSample[]>([]);
+  const [lastUpdatedAt, setLastUpdatedAt] = useState<number | null>(null);
   const [connection, setConnection] =
     useState<ConnectionStatus>("connecting");
   const [connectionText, setConnectionText] = useState("Menghubungkan…");
@@ -148,12 +112,6 @@ export default function Dashboard() {
   const [predictionModel, setPredictionModel] =
     useState<PredictionModelInfo>({ status: "loading" });
   const [now, setNow] = useState<number | null>(null);
-  const [classifiedReading, setClassifiedReading] = useState<{
-    ts: number;
-    result: TapeModelResult;
-  } | null>(null);
-  const [modelError, setModelError] = useState<string | null>(null);
-  const [modelLoading, setModelLoading] = useState(false);
   const [events, setEvents] = useState<EventLog[]>([]);
   const eventId = useRef(0);
   const previousStage = useRef<number | null>(null);
@@ -199,7 +157,7 @@ export default function Dashboard() {
         activateDatasetModel(null);
         setPredictionModel({
           status: "fallback",
-          message: "Model dataset tidak tersedia atau tidak valid.",
+          message: "Perkiraan tahap otomatis tidak tersedia.",
         });
       }
     })();
@@ -289,6 +247,7 @@ export default function Dashboard() {
       setNow(demoNow);
       setBatchStart(demoStart);
       setReadings(createDemoHistory(demoNow, demoStart));
+      setLastUpdatedAt(demoNow);
       setConnection("demo");
       setConnectionText("Mode demo");
 
@@ -296,6 +255,7 @@ export default function Dashboard() {
         virtualOffset += CONFIG.demoStepMinutes * 60_000;
         const timestamp = Date.now() + virtualOffset;
         setNow(timestamp);
+        setLastUpdatedAt(Date.now());
         setReadings((current) =>
           [
             ...current,
@@ -315,11 +275,12 @@ export default function Dashboard() {
     const poll = async () => {
       if (polling) return;
       polling = true;
-      setNow(Date.now());
+      const requestStartedAt = Date.now();
+      setNow(requestStartedAt);
 
       try {
         const response = await fetch(
-          `/api/sensor?limit=${CONFIG.maxPoints}`,
+          `/api/sensor?limit=${CONFIG.apiHistoryLimit}`,
           { cache: "no-store" },
         );
         if (!response.ok) {
@@ -332,6 +293,7 @@ export default function Dashboard() {
         const rows = parseSensorRows(await response.json());
         const samples = asSamples(rows);
         setReadings(samples);
+        setLastUpdatedAt(Date.now());
 
         if (samples.length === 0) {
           setConnection("offline");
@@ -375,60 +337,6 @@ export default function Dashboard() {
   }, [demo, mounted]);
 
   useEffect(() => {
-    if (!latest) {
-      setModelLoading(false);
-      setModelError(null);
-      return;
-    }
-
-    const controller = new AbortController();
-    const reading = latest;
-    setModelLoading(true);
-    setModelError(null);
-
-    void (async () => {
-      try {
-        const response = await fetch("/api/predict", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            temp: reading.temp,
-            hum: reading.hum,
-          }),
-          signal: controller.signal,
-        });
-        const body: unknown = await response.json();
-
-        if (!response.ok) {
-          const message =
-            typeof body === "object" &&
-            body !== null &&
-            "error" in body &&
-            typeof body.error === "string"
-              ? body.error
-              : `Server prediksi merespons dengan status ${response.status}.`;
-          throw new Error(message);
-        }
-
-        setClassifiedReading({
-          ts: reading.ts,
-          result: parseTapeModelResult(body),
-        });
-      } catch (error) {
-        if (controller.signal.aborted) return;
-        const message =
-          error instanceof Error ? error.message : "Prediksi AI gagal.";
-        console.error("Gagal meminta prediksi kematangan tape:", message);
-        setModelError(message);
-      } finally {
-        if (!controller.signal.aborted) setModelLoading(false);
-      }
-    })();
-
-    return () => controller.abort();
-  }, [latest?.hum, latest?.temp, latest?.ts]);
-
-  useEffect(() => {
     if (!mounted) return;
     try {
       localStorage.setItem(
@@ -447,10 +355,6 @@ export default function Dashboard() {
     }
   }, [addLog, mounted, overripeThreshold, ripeThreshold]);
 
-  const currentModel =
-    latest && classifiedReading?.ts === latest.ts
-      ? classifiedReading.result
-      : null;
   const prediction = useMemo(() => {
     if (!latest) return null;
     return predict({
@@ -487,7 +391,7 @@ export default function Dashboard() {
       if (prediction.overripe) {
         addLog(
           predictionModel.status === "ready"
-            ? "Model dataset mengklasifikasikan tape lewat matang"
+            ? "Perkiraan sensor menunjukkan kemungkinan tape lewat matang"
             : "Gas sangat tinggi, tape mulai lewat matang",
           "bad",
         );
@@ -521,6 +425,7 @@ export default function Dashboard() {
     setDemo(nextDemo);
     setReadings([]);
     setNow(Date.now());
+    setLastUpdatedAt(nextDemo ? Date.now() : null);
     setConnection(nextDemo ? "demo" : "connecting");
     setConnectionText(nextDemo ? "Mode demo" : "Menghubungkan…");
     previousStage.current = null;
@@ -544,12 +449,25 @@ export default function Dashboard() {
     setOverripeThreshold(Math.max(value, ripeThreshold + 50));
   }
 
+  function openSensorGraph(key: SensorKey) {
+    setSeries(key);
+    document.getElementById("riwayat")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
   const estimate =
     mounted && prediction
       ? prediction.remainingHours === 0
         ? "Sudah matang"
         : formatDuration(prediction.remainingHours)
       : "–";
+  const displayReadings = readings.slice(-CONFIG.maxPoints);
+  const summaryReadings = readings.filter(
+    (reading) =>
+      reading.ts >= (now ?? Date.now()) - CONFIG.summaryWindowMs,
+  );
 
   return (
     <div className="sheet">
@@ -557,8 +475,10 @@ export default function Dashboard() {
       <Hero estimate={estimate} />
       <Stages activeStage={prediction?.stageIndex ?? -1} />
       <SensorCards
-        readings={readings}
-        onSelectSeries={setSeries}
+        readings={displayReadings}
+        summaryReadings={summaryReadings}
+        lastUpdatedAt={lastUpdatedAt}
+        onSelectSeries={openSensorGraph}
         ripeThreshold={ripeThreshold}
         overripeThreshold={overripeThreshold}
       />
@@ -570,13 +490,13 @@ export default function Dashboard() {
         onToggleDemo={toggleDemo}
         onStartBatch={startNewBatch}
       />
-      <AiAdvisor
-        result={currentModel}
-        error={modelError}
-        loading={modelLoading}
+      <SensorInsights
+        latestReading={latest}
+        summaryReadings={summaryReadings}
+        lastUpdatedAt={lastUpdatedAt}
       />
       <History
-        readings={readings}
+        readings={displayReadings}
         series={series}
         onSelectSeries={setSeries}
         events={events}
@@ -588,7 +508,7 @@ export default function Dashboard() {
       />
       <footer>
         <span>Peram · ESP32 → Next.js → Supabase</span>
-        <span>Data diperbarui tiap 5 detik</span>
+        <span>Pembaruan live tiap 5 detik · ringkasan 10 menit</span>
       </footer>
     </div>
   );

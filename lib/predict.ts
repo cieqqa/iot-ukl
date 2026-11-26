@@ -197,7 +197,13 @@ export function classifyWithDatasetModel(
   model: DatasetMaturityModel,
   temp: number,
   hum: number,
-): { label: MaturityLabel; confidence: number; sampleCount: number } {
+): {
+  label: MaturityLabel;
+  confidence: number;
+  sampleCount: number;
+  neighborCount: number;
+  winningVotes: number;
+} {
   const neighbors = model.trainingSamples
     .map((sample) => ({
       label: sample.label,
@@ -237,6 +243,8 @@ export function classifyWithDatasetModel(
     label,
     confidence: winner.count / neighbors.length,
     sampleCount: model.metadata.trainingSampleCount,
+    neighborCount: neighbors.length,
+    winningVotes: winner.count,
   };
 }
 
@@ -268,19 +276,21 @@ function predictWithLegacyRules(input: PredictionInput): PredictionResult {
   const notes: string[] = [];
   if (input.reading.temp < CONFIG.idealTemperature[0]) {
     notes.push(
-      `🥶 Suhu di bawah ideal (${CONFIG.idealTemperature.join("–")}°C), fermentasi bisa lebih lambat.`,
+      `Suhu ${input.reading.temp.toFixed(1)} °C berada di bawah rentang acuan aplikasi (${CONFIG.idealTemperature.join("–")} °C). Jangan mengubah proses hanya berdasarkan angka ini.`,
     );
   } else if (input.reading.temp > CONFIG.idealTemperature[1]) {
     notes.push(
-      `🔥 Suhu di atas ideal (${CONFIG.idealTemperature.join("–")}°C), tape bisa cepat asam.`,
+      `Suhu ${input.reading.temp.toFixed(1)} °C berada di atas rentang acuan aplikasi (${CONFIG.idealTemperature.join("–")} °C). Periksa kondisi tape secara langsung.`,
     );
   } else {
-    notes.push("✅ Suhu dalam kisaran ideal.");
+    notes.push(
+      `Suhu ${input.reading.temp.toFixed(1)} °C berada dalam rentang acuan aplikasi; ini belum memastikan tape matang.`,
+    );
   }
 
   if (overripe) {
     notes.push(
-      "⚠️ Gas alkohol sangat tinggi, tape kemungkinan sudah lewat matang dan terasa asam.",
+      "Nilai sensor gas tinggi. Periksa aroma dan kondisi tape; jangan dicicipi jika ada tanda mencurigakan.",
     );
   }
 
@@ -330,22 +340,24 @@ export function predict(input: PredictionInput): PredictionResult {
 
   if (input.reading.temp < CONFIG.idealTemperature[0]) {
     notes.push(
-      `🥶 Suhu di bawah rentang data tape matang (${CONFIG.idealTemperature.join("–")}°C).`,
+      `Suhu ${input.reading.temp.toFixed(1)} °C berada di bawah rentang acuan aplikasi (${CONFIG.idealTemperature.join("–")} °C). Jangan mengubah proses hanya berdasarkan angka ini.`,
     );
   } else if (input.reading.temp > CONFIG.idealTemperature[1]) {
     notes.push(
-      `🔥 Suhu di atas rentang data tape matang (${CONFIG.idealTemperature.join("–")}°C).`,
+      `Suhu ${input.reading.temp.toFixed(1)} °C berada di atas rentang acuan aplikasi (${CONFIG.idealTemperature.join("–")} °C). Periksa kondisi tape secara langsung.`,
     );
   } else {
-    notes.push("✅ Suhu berada dalam rentang data berlabel Matang.");
+    notes.push(
+      `Suhu ${input.reading.temp.toFixed(1)} °C berada dalam rentang acuan aplikasi; ini belum memastikan tape matang.`,
+    );
   }
 
   notes.push(
-    `ℹ️ Tahap berasal dari suhu dan kelembapan dataset; estimasi waktu tetap memakai aturan awal ${CONFIG.targetHours} jam karena dataset tidak mencatat durasi.`,
+    `Perkiraan tahap memakai suhu dan kelembapan udara. Waktu tersisa belum diukur; aplikasi masih memakai patokan awal ${CONFIG.targetHours} jam.`,
   );
   if (overripe) {
     notes.push(
-      "⚠️ Dataset mengklasifikasikan sampel sebagai overfermentasi; model tidak memastikan keamanan pangan.",
+      "Pola sensor menunjukkan kemungkinan fermentasi berlebih. Jangan dicicipi jika ada jamur, lendir, atau bau menyimpang.",
     );
   }
   if (input.batchStart === null) {

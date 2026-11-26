@@ -1,8 +1,11 @@
 import { CONFIG, SENSORS } from "@/lib/config";
+import { formatDateTime } from "@/lib/format";
 import type { SensorKey, SensorSample } from "@/lib/types";
 
 type SensorCardsProps = {
   readings: SensorSample[];
+  summaryReadings: SensorSample[];
+  lastUpdatedAt: number | null;
   onSelectSeries: (key: SensorKey) => void;
 };
 
@@ -12,12 +15,12 @@ function sensorStatus(
 ): { label: string; tone: string } {
   if (key === "temp") {
     if (value < CONFIG.idealTemperature[0]) {
-      return { label: "#di bawah rentang data", tone: "warn" };
+      return { label: "#di bawah acuan", tone: "warn" };
     }
     if (value > CONFIG.idealTemperature[1]) {
-      return { label: "#di atas rentang data", tone: "bad" };
+      return { label: "#di atas acuan", tone: "bad" };
     }
-    return { label: "#rentang Matang", tone: "ok" };
+    return { label: "#dalam rentang acuan", tone: "ok" };
   }
 
   if (key === "hum") {
@@ -92,6 +95,8 @@ function sparkline(readings: SensorSample[], key: SensorKey) {
 
 export default function SensorCards({
   readings,
+  summaryReadings,
+  lastUpdatedAt,
   onSelectSeries,
   ripeThreshold,
   overripeThreshold,
@@ -105,9 +110,55 @@ export default function SensorCards({
     <section className="sec" id="pantau">
       <div className="sec-h">
         <h2>Pantauan langsung</h2>
-        <span className="hint">
-          {latest ? `Diperbarui ${new Date(latest.ts).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }).replace(".", ":")}` : "–"}
-        </span>
+        <div className="sync-meta">
+          <span>
+            Sinkronisasi dashboard:{" "}
+            {lastUpdatedAt !== null ? formatDateTime(lastUpdatedAt) : "belum ada"}
+          </span>
+          <span>
+            Sensor terakhir masuk:{" "}
+            {latest ? formatDateTime(latest.ts) : "belum ada"}
+          </span>
+        </div>
+      </div>
+      <div className="summary-ten-minute">
+        <div className="summary-head">
+          <h3>Ringkasan 10 menit terakhir</h3>
+          <span>{summaryReadings.length} pembacaan sensor</span>
+        </div>
+        {summaryReadings.length === 0 ? (
+          <p className="summary-empty">
+            Belum ada data sensor dalam 10 menit terakhir.
+          </p>
+        ) : (
+          <div className="summary-grid">
+            {SENSORS.map((sensor) => {
+              const values = summaryReadings.map(
+                (reading) => reading[sensor.key],
+              );
+              const average =
+                values.reduce((total, value) => total + value, 0) /
+                values.length;
+              const formatValue = (value: number) =>
+                sensor.key === "temp"
+                  ? value.toFixed(1)
+                  : String(Math.round(value));
+
+              return (
+                <div className="summary-item" key={sensor.key}>
+                  <small>{sensor.title}</small>
+                  <b>
+                    {formatValue(average)} {sensor.unit}
+                  </b>
+                  <span>
+                    Min {formatValue(Math.min(...values))} · Maks{" "}
+                    {formatValue(Math.max(...values))}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
       <div className="sens">
         {SENSORS.map((sensor) => {
@@ -163,7 +214,7 @@ export default function SensorCards({
                   onClick={() => onSelectSeries(sensor.key)}
                   type="button"
                 >
-                  Grafik <span>↗</span>
+                  Lihat grafik <span>↗</span>
                 </button>
               </div>
             </article>

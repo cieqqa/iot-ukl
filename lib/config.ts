@@ -3,6 +3,8 @@ import type { SensorDefinition, SensorKey } from "@/lib/types";
 export const CONFIG = {
   pollIntervalMs: 5_000,
   maxPoints: 90,
+  apiHistoryLimit: 500,
+  summaryWindowMs: 10 * 60_000,
   gasMax: 4_095,
   staleSeconds: 40,
   // Dataset contains no elapsed-time labels; retained only for the legacy ETA.

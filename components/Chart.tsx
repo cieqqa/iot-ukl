@@ -39,7 +39,7 @@ export default function Chart({
       const left = 42;
       const right = 8;
       const top = 10;
-      const bottom = 24;
+      const bottom = 34;
       context.font = "11px Onest,system-ui";
       context.fillStyle = "#75736b";
       context.strokeStyle = "#e4ddd0";
@@ -128,8 +128,23 @@ export default function Chart({
         else context.lineTo(x, y);
       });
       context.stroke();
+      const formatTime = (timestamp: number) =>
+        new Date(timestamp)
+          .toLocaleTimeString("id-ID", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+          .replace(/\./g, ":");
       context.fillStyle = "#75736b";
-      context.fillText(SERIES[series], left, height - 6);
+      context.textAlign = "left";
+      context.fillText(formatTime(readings[0].ts), left, height - 6);
+      context.textAlign = "right";
+      context.fillText(
+        formatTime(readings[readings.length - 1].ts),
+        width - right,
+        height - 6,
+      );
+      context.textAlign = "left";
     };
 
     draw();

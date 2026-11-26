@@ -22,6 +22,9 @@ export default function Prediction({
   const progress = prediction?.progress ?? 0;
   const percent = Math.round(progress * 100);
   const currentStage = prediction ? STAGES[prediction.stageIndex] : null;
+  const stageLabel = prediction?.overripe
+    ? "Lewat matang"
+    : currentStage?.name ?? "–";
   const estimate =
     !mounted || !prediction
       ? "–"
@@ -45,9 +48,7 @@ export default function Prediction({
       <div className="pred">
         <div className="ringcard">
           <h3>
-            {prediction?.overripe
-              ? "Lewat matang"
-              : currentStage?.name ?? "–"}
+            {stageLabel}
           </h3>
           <div className="ring">
             <svg viewBox="0 0 120 120" aria-hidden="true">
@@ -62,8 +63,8 @@ export default function Prediction({
               />
             </svg>
             <div className="mid">
-              <b>{percent}%</b>
-              <span>tingkat kematangan</span>
+              <b>{prediction ? `${prediction.stageIndex + 1} / 4` : "–"}</b>
+              <span>urutan tahap</span>
             </div>
           </div>
           <p>
@@ -125,24 +126,20 @@ export default function Prediction({
           <div className="model">
             {modelInfo.status === "ready" ? (
               <>
-                Klasifikasi tahap memakai KNN dari {modelInfo.trainingSampleCount}{" "}
-                data latih (dari {modelInfo.sampleCount} baris dataset), dengan
-                akurasi uji {(modelInfo.accuracy * 100).toFixed(1)}% pada{" "}
-                {modelInfo.testSampleCount} baris. Galat rata-rata waktu tidak
-                dapat dihitung karena dataset tidak mencatat durasi; estimasi
-                jam masih memakai aturan awal {CONFIG.targetHours} jam, bukan
-                hasil model. Slider gas hanya berlaku untuk fallback lama.
+                Perkiraan tahap membaca suhu dan kelembapan udara. Cocokkan
+                hasilnya dengan aroma, tekstur, dan warna tape; angka sensor
+                bukan jaminan kematangan atau keamanan. Perkiraan waktu masih
+                memakai patokan awal {CONFIG.targetHours} jam, bukan hasil
+                pengukuran waktu matang.
               </>
             ) : modelInfo.status === "fallback" ? (
               <>
-                {modelInfo.message} Prediksi memakai aturan sederhana lama
-                (waktu berjalan + kadar gas alkohol).
+                Perkiraan tahap otomatis tidak tersedia. Gunakan pembacaan
+                sensor sebagai informasi tambahan dan periksa kondisi tape
+                secara langsung.
               </>
             ) : (
-              <>
-                Model dataset sedang dimuat; sementara prediksi memakai aturan
-                sederhana lama (waktu berjalan + kadar gas alkohol).
-              </>
+              <>Menyiapkan perkiraan tahap dari pembacaan sensor.</>
             )}
           </div>
         </div>

@@ -34,3 +34,16 @@ export function formatTime(timestamp: number): string {
     .toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })
     .replace(".", ":");
 }
+
+export function formatDateTime(timestamp: number): string {
+  return new Date(timestamp)
+    .toLocaleString("id-ID", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    })
+    .replace(/\./g, ":");
+}

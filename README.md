@@ -39,6 +39,12 @@ Buka dashboard di `http://localhost:3000`. Untuk melihat data contoh tanpa
 memanggil API sensor, buka `http://localhost:3000/?demo` atau
 `http://localhost:3000/peram?demo`.
 
+Dalam mode normal, dashboard mengambil data sensor langsung dari API setiap
+5 detik, menampilkan insight perubahan sensor 10 menit terakhir, dan mencatat
+20 pembacaan terbaru beserta tanggal dan waktunya. Tombol **Lihat grafik**
+memilih grafik sensor terkait dan membawamu ke bagian riwayat. Pastikan tombol
+mode demo tidak aktif untuk melihat data ESP32.
+
 Untuk menjalankan build produksi secara lokal:
 
 ```powershell
@@ -59,6 +65,11 @@ Model hanya mengklasifikasikan label kematangan; MAE waktu tidak dapat dihitung.
 Estimasi waktu 72 jam yang masih tampil adalah aturan awal lama, bukan hasil
 pelatihan. Dataset juga belum dapat menunjukkan akurasi pada batch baru, jadi
 hasilnya bukan jaminan keamanan pangan.
+
+Evaluasi internal saat ini memperoleh akurasi klasifikasi 98.5% pada 200 baris
+uji yang dipisah acak per label dari dataset 1.000 baris yang sama. Karena
+dataset tidak memiliki identitas batch dan data uji bukan batch baru, angka ini
+tidak membuktikan tingkat akurasi untuk proses fermentasi pengguna.
 
 ### Melatih ulang model
 

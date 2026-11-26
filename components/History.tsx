@@ -1,5 +1,5 @@
 import { SENSOR_SERIES, SERIES } from "@/lib/config";
-import { formatTime } from "@/lib/format";
+import { formatDateTime, formatTime } from "@/lib/format";
 import type { EventLog, SensorKey, SensorSample } from "@/lib/types";
 import Chart from "@/components/Chart";
 
@@ -26,6 +26,8 @@ export default function History({
   onOverripeThresholdChange,
   mounted,
 }: HistoryProps) {
+  const recentReadings = [...readings].slice(-20).reverse();
+
   return (
     <section className="sec" id="riwayat">
       <div className="sec-h">
@@ -111,6 +113,44 @@ export default function History({
               />
             </div>
           </div>
+        </div>
+      </div>
+      <div className="sensor-updates">
+        <div className="updates-heading">
+          <h3>Pembaruan data sensor</h3>
+          <span>20 pembacaan terbaru</span>
+        </div>
+        <div className="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Tanggal &amp; waktu</th>
+                <th scope="col">Suhu</th>
+                <th scope="col">Kelembapan udara</th>
+                <th scope="col">Gas (ADC)</th>
+                <th scope="col">Kelembapan tape</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentReadings.length === 0 ? (
+                <tr>
+                  <td className="table-empty" colSpan={5}>
+                    Belum ada pembacaan sensor.
+                  </td>
+                </tr>
+              ) : (
+                recentReadings.map((reading) => (
+                  <tr key={reading.ts}>
+                    <td>{formatDateTime(reading.ts)}</td>
+                    <td>{reading.temp.toFixed(1)} °C</td>
+                    <td>{Math.round(reading.hum)}%</td>
+                    <td>{Math.round(reading.gas)} ADC</td>
+                    <td>{Math.round(reading.soil)}%</td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

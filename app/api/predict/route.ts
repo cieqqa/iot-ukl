@@ -1,7 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { NextResponse } from "next/server";
-import { CONFIG } from "@/lib/config";
 import {
   classifyWithDatasetModel,
   parseDatasetModel,
@@ -54,25 +53,43 @@ function isPredictionInput(
   );
 }
 
-function getRecommendation(label: MaturityLabel, temperature: number): string {
-  const [minimum, maximum] = CONFIG.idealTemperature;
-  const temperatureAdvice =
-    temperature < minimum
-      ? `Suhu di bawah rentang data tape matang (${minimum}–${maximum} °C).`
-      : temperature > maximum
-        ? `Suhu di atas rentang data tape matang (${minimum}–${maximum} °C).`
-        : "";
+function getRecommendation(label: MaturityLabel): string {
   const advice: Record<MaturityLabel, string> = {
     "Belum Matang":
-      "Lanjutkan fermentasi dalam wadah bersih dan tertutup. Periksa kembali kondisi tape secara berkala.",
+      "Model melihat pola yang lebih mirip contoh berlabel “Belum Matang”. Lanjutkan peraman dalam wadah bersih dan tertutup. Periksa aroma, tekstur, dan warna secara berkala; model ini tidak bisa menghitung berapa jam lagi tape akan matang.",
     "Hampir Matang":
-      "Periksa aroma dan tekstur tanpa mencicipi bila ada tanda mencurigakan. Pantau kembali secara berkala.",
+      "Model melihat pola yang mendekati contoh “Hampir Matang”. Periksa apakah aroma dan teksturnya sudah sesuai dengan tape yang biasa kamu buat. Jika belum, lanjutkan peraman dan pantau lagi; jangan mengambil keputusan hanya dari angka sensor.",
     Matang:
-      "Hentikan fermentasi dan simpan dalam wadah bersih tertutup di kulkas agar fermentasi melambat.",
+      "Model melihat pola yang mirip contoh “Matang”. Cocokkan dengan aroma dan tekstur tape. Jika keduanya sesuai dan tidak ada tanda mencurigakan, hentikan peraman lalu simpan tertutup di kulkas.",
     "Overfermentasi / Busuk":
-      "Jangan dicicipi untuk menguji. Jika ada jamur, lendir, atau bau busuk/menyimpang, buang tape; model tidak memastikan keamanan pangan.",
+      "Model melihat pola yang mirip contoh “Overfermentasi / Busuk”. Jangan dicicipi untuk menguji. Jika ada jamur, lendir, atau bau menyimpang, buang tape; hasil model tidak bisa memastikan keamanan pangan.",
   };
-  return [advice[label], temperatureAdvice].filter(Boolean).join(" ");
+  return advice[label];
+}
+
+function getRangeWarning(
+  model: DatasetMaturityModel,
+  temp: number,
+  hum: number,
+): string | null {
+  const [minimumTemp, minimumHumidity] = model.normalization.min;
+  const [maximumTemp, maximumHumidity] = model.normalization.max;
+  const outside: string[] = [];
+
+  if (temp < minimumTemp || temp > maximumTemp) {
+    outside.push(
+      `suhu ${temp.toFixed(1)} °C (rentang data latih ${minimumTemp.toFixed(1)}–${maximumTemp.toFixed(1)} °C)`,
+    );
+  }
+  if (hum < minimumHumidity || hum > maximumHumidity) {
+    outside.push(
+      `kelembapan udara ${hum.toFixed(1)}% (rentang data latih ${minimumHumidity.toFixed(1)}–${maximumHumidity.toFixed(1)}%)`,
+    );
+  }
+
+  return outside.length
+    ? `Pembacaan ${outside.join(" dan ")} berada di luar rentang data latih. Anggap hasil ini kurang meyakinkan.`
+    : null;
 }
 
 function errorMessage(error: unknown): string {
@@ -113,9 +130,14 @@ export async function POST(request: Request) {
   try {
     const model = await loadDatasetModel();
     const result = classifyWithDatasetModel(model, input.temp, input.hum);
+    const rangeWarning = getRangeWarning(model, input.temp, input.hum);
     return NextResponse.json({
       ...result,
-      recommendation: getRecommendation(result.label, input.temp),
+      explanation: `Sensor membaca suhu ${input.temp.toFixed(1)} °C dan kelembapan udara ${input.hum.toFixed(1)}%. Model membandingkan dua angka ini dengan dataset; ${result.winningVotes} dari ${result.neighborCount} contoh terdekat berlabel “${result.label}”. Gas dan kelembapan tape tidak dipakai untuk menentukan label AI.`,
+      rangeWarning,
+      recommendation: getRecommendation(result.label),
+      validationAccuracy: model.metadata.accuracy,
+      testSampleCount: model.metadata.testSampleCount,
     });
   } catch (error) {
     const message = errorMessage(error);

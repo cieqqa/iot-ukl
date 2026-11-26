@@ -20,7 +20,13 @@ export type TapeModelResult = {
   label: MaturityLabel;
   confidence: number;
   recommendation: string;
+  explanation: string;
+  rangeWarning: string | null;
   sampleCount: number;
+  neighborCount: number;
+  winningVotes: number;
+  validationAccuracy: number;
+  testSampleCount: number;
 };
 
 export type PredictionModelInfo =
